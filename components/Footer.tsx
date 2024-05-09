@@ -25,7 +25,7 @@ export function Footer() {
           >
             Axum
           </Link>
-          . The source code is available on{" "}
+          . The source code is available{" "}
           <Link
             href="#"
             className="font-medium underline underline-offset-4"
