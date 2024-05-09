@@ -1,3 +1,4 @@
+import { ContactButtons } from "@/components/ContactButtons";
 import Link from "next/link";
 
 export function Footer() {
@@ -42,6 +43,9 @@ export function Footer() {
           </Link>
           .
         </p>
+        <div className="flex">
+          <ContactButtons />
+        </div>
       </div>
     </footer>
   );
