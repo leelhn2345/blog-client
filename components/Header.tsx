@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
+import { Leaf, Menu } from "lucide-react";
 
 export function Header() {
   return (
@@ -26,8 +26,9 @@ export function Header() {
           <Menu />
         </Button>
         <NavigationMenu className="hidden sm:flex">
+          <Leaf color="#0f766e" className="mr-4" />
           {/* <NavigationMenuList className="flex-col items-start space-x-0"> */}
-          <NavigationMenuList className="space-x-0">
+          <NavigationMenuList>
             <NavigationMenuItem>
               <Link href="/" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
@@ -50,7 +51,7 @@ export function Header() {
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <Link href="/blog" legacyBehavior passHref>
+              <Link href="/contact" legacyBehavior passHref>
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   Contact Me
                 </NavigationMenuLink>
