@@ -4,6 +4,57 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { JobExperience, TJobExperience } from "./JobExperience";
+import { Projects, TProject } from "./Projects";
+
+const jobExperiencesSample: TJobExperience[] = [
+  {
+    companyName: "Company 2",
+    companyUrl: "https://google.com",
+    timeSpan: "Feb 2022 - Present",
+    occupation: "Software Engineer",
+    responsibilities: [
+      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+      "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+      "responsibility 3",
+      "responsiblity 4",
+    ],
+  },
+  {
+    companyName: "Company 1",
+
+    companyUrl: "https://google.com",
+    timeSpan: "Feb 2020 - Jan 2022",
+    occupation: "Software Engineer",
+    responsibilities: [
+      "responsibility 1",
+      "responsiblity 2",
+      "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+    ],
+  },
+];
+
+const projectSample: TProject[] = [
+  {
+    name: "Telegram Bot",
+    url: "https://google.com",
+    features: [
+      "Lorem ipsum dolor sit amet, qui minim labore adipisicing minim sint cillum sint consectetur cupidatat.",
+      "chatgpt integration",
+      "cron-job reminder",
+    ],
+  },
+  {
+    name: "Bot control",
+    url: "https://google.com",
+    features: [
+      "chatgpt integration",
+      "cron-job reminder",
+      "Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.",
+    ],
+  },
+];
 
 export function Resume() {
   return (
@@ -33,100 +84,13 @@ export function Resume() {
       <AccordionItem value="item-3">
         <AccordionTrigger>Experiences</AccordionTrigger>
         <AccordionContent>
-          <ol className="relative start-1.5 border-s border-gray-200 dark:border-gray-700">
-            <li className="mb-10 ms-4">
-              <div
-                className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200
-                  dark:border-gray-900 dark:bg-gray-700"
-              ></div>
-              <div className="my-4 flex flex-col gap-2">
-                <h2 className="text-lg">Company 1</h2>
-                <div className="flex justify-between text-base">
-                  <h4>Job occupation</h4>
-                  <time className="mb-1 mr-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                    Feb 2022 - Present
-                  </time>
-                </div>
-                <ul className="ml-8 mr-2 list-disc space-y-2 text-justify">
-                  <li>responsibility 1</li>
-                  <li>responsbility 2</li>
-                  <li>
-                    Lorem ipsum dolor sit amet, officia excepteur ex fugiat
-                    reprehenderit enim labore culpa sint ad nisi Lorem pariatur
-                    mollit ex esse exercitation amet. Nisi anim cupidatat
-                    excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem
-                    est aliquip amet voluptate voluptate dolor minim nulla est
-                    proident. Nostrud officia pariatur ut officia. Sit irure
-                    elit esse ea nulla sunt ex occaecat reprehenderit commodo
-                    officia dolor Lorem duis laboris cupidatat officia
-                    voluptate. Culpa proident adipisicing id nulla nisi laboris
-                    ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit
-                    commodo ex non excepteur duis sunt velit enim. Voluptate
-                    laboris sint cupidatat ullamco ut ea consectetur et est
-                    culpa et culpa duis.
-                  </li>
-                  <li>
-                    Lorem ipsum dolor sit amet, qui minim labore adipisicing
-                    minim sint cillum sint consectetur cupidatat.
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li className="mb-10 ms-4">
-              <div
-                className="absolute -start-1.5 mt-1.5 h-3 w-3 rounded-full border border-white bg-gray-200
-                  dark:border-gray-900 dark:bg-gray-700"
-              ></div>
-              <div className="my-4 flex flex-col gap-2">
-                <h2 className="text-lg">Company 2</h2>
-                <div className="flex justify-between text-base">
-                  <h4>Job occupation</h4>
-                  <time className="mb-1 mr-4 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                    Feb 1922 - Jan 2022
-                  </time>
-                </div>
-                <ul className="ml-8 mr-4 list-disc space-y-2 text-justify">
-                  <li>responsibility 1</li>
-                  <li>responsbility 2</li>
-                  <li>
-                    Lorem ipsum dolor sit amet, officia excepteur ex fugiat
-                    reprehenderit enim labore culpa sint ad nisi Lorem pariatur
-                    mollit ex esse exercitation amet. Nisi anim cupidatat
-                    excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem
-                    est aliquip amet voluptate voluptate dolor minim nulla est
-                    proident. Nostrud officia pariatur ut officia. Sit irure
-                    elit esse ea nulla sunt ex occaecat reprehenderit commodo
-                    officia dolor Lorem duis laboris cupidatat officia
-                    voluptate. Culpa proident adipisicing id nulla nisi laboris
-                    ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit
-                    commodo ex non excepteur duis sunt velit enim. Voluptate
-                    laboris sint cupidatat ullamco ut ea consectetur et est
-                    culpa et culpa duis.
-                  </li>
-                  <li>
-                    Lorem ipsum dolor sit amet, qui minim labore adipisicing
-                    minim sint cillum sint consectetur cupidatat.
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ol>
+          <JobExperience data={jobExperiencesSample} />
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-4">
         <AccordionTrigger>Projects</AccordionTrigger>
         <AccordionContent>
-          Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
-          enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
-          exercitation amet. Nisi anim cupidatat excepteur officia.
-          Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate
-          voluptate dolor minim nulla est proident. Nostrud officia pariatur ut
-          officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit
-          commodo officia dolor Lorem duis laboris cupidatat officia voluptate.
-          Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis
-          officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis
-          sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea
-          consectetur et est culpa et culpa duis.
+          <Projects data={projectSample} />
         </AccordionContent>
       </AccordionItem>
     </Accordion>
