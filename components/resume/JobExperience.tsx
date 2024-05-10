@@ -30,7 +30,7 @@ export function JobExperience({ data }: JobExperienceProp) {
             >
               <h2>{x.companyName}</h2>
             </Link>
-            <div className="flex justify-between text-base">
+            <div className="flex items-center justify-between text-base">
               <h4 className="italic">{x.occupation}</h4>
               <time className="mb-1 mr-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
                 {x.timeSpan}
