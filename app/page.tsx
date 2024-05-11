@@ -1,35 +1,24 @@
-import { Resume } from "@/components/resume/Resume";
-import { ContactButtons } from "../components/ContactButtons";
-import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
-import profileImage from "../public/profile.jpg";
+import { TreePine } from "lucide-react";
 
 export default function Home() {
   return (
-    <div className="my-8 md:grid md:grid-cols-4 md:gap-x-64">
-      <div className="w-full pt-4 text-center md:text-left">
-        <section className="md:fixed">
-          <div className="mb-8 pl-3">
-            <Image
-              width={200}
-              priority
-              className="mx-auto mb-6 rounded-3xl dark:border-2 dark:border-white"
-              src={profileImage}
-              alt="profile image"
-            />
-            <h1 className="mb-4 text-2xl font-bold">Lee Lai Hon Nelson</h1>
-            <h3 className="mb-4">Software Engineer</h3>
-            <p className="text-sm">B.Eng | Electrical Engineering</p>
-            <p className="text-sm">National University of Singapore</p>
-          </div>
-          <div className="mb-4 flex items-center justify-center md:mb-0">
-            <ContactButtons />
-          </div>
-        </section>
-      </div>
-      <div className="text-left md:col-span-3">
-        <Separator className="md:hidden" />
-        <Resume />
+    <div className="container my-8 flex flex-col items-center justify-center text-center">
+      <h1
+        className="animate-gradient bg-gradient-to-br from-orange-500 to-teal-800 bg-clip-text pb-2
+          text-4xl font-bold text-transparent lg:text-5xl"
+      >
+        Digital Garden
+      </h1>
+      <TreePine className="animate-tree h-48 w-48 lg:h-64 lg:w-64" />
+      <div className="mt-2 space-y-4">
+        <p className="font-semibold">
+          This site serves as a software experimental test bed.
+        </p>
+        <p>And</p>
+        <p>
+          Whence comes the name{" "}
+          <span className="font-semibold italic">Digital Garden</span> ?
+        </p>
       </div>
     </div>
   );

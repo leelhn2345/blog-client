@@ -10,6 +10,7 @@ import {
 import Link from "next/link";
 import { Leaf } from "lucide-react";
 import { Sidebar } from "./Sidebar";
+import navigationData from "../data/navigation.json";
 
 export function Header() {
   return (
@@ -22,34 +23,15 @@ export function Header() {
         <NavigationMenu className="hidden sm:flex">
           <Leaf className="mr-4 text-teal-600" />
           <NavigationMenuList>
-            <NavigationMenuItem>
-              <Link href="/" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Home
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/projects" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Projects
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/blog" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Blog
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <Link href="/contact" legacyBehavior passHref>
-                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                  Contact Me
-                </NavigationMenuLink>
-              </Link>
-            </NavigationMenuItem>
+            {navigationData.map((data) => (
+              <NavigationMenuItem key={data.name}>
+                <Link href={data.url} legacyBehavior passHref>
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    {data.name}
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>
+            ))}
           </NavigationMenuList>
         </NavigationMenu>
       </div>
