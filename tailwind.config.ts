@@ -67,10 +67,26 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "animated-gradient": {
+          "0%, 100%": {
+            backgroundPosition: "0% 50%",
+            backgroundSize: "300% 300%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+            backgroundSize: "300% 300%",
+          },
+        },
+        "animated-tree": {
+          "0%,100%": { stroke: "#064e3b", fill: "#115e59" },
+          "50%": { stroke: "#115e59", fill: "#064e3b" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        gradient: "animated-gradient 6s ease infinite alternate",
+        tree: "animated-tree 6s linear infinite",
       },
     },
   },
@@ -78,4 +94,3 @@ const config = {
 } satisfies Config;
 
 export default config;
-
