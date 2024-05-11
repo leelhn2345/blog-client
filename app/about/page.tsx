@@ -6,7 +6,7 @@ import profileImage from "../../public/profile.jpg";
 
 export default function Home() {
   return (
-    <div className="my-8 md:grid md:grid-cols-4 md:gap-x-64">
+    <div className="container my-8 md:grid md:grid-cols-4 md:gap-x-64">
       <div className="w-full pt-4 text-center md:text-left">
         <section className="md:fixed">
           <div className="mb-8 pl-3">
