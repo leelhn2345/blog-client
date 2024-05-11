@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/providers/theme";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,14 +22,21 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "flex min-h-screen flex-col antialiased",
+          "flex min-h-screen flex-col antialiased dark:bg-[#010101] dark:text-white",
           inter.className,
         )}
         suppressHydrationWarning={true}
       >
-        <Header />
-        <main className="flex flex-1 border-b">{children}</main>
-        <Footer />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <main className="flex flex-1 border-b">{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
