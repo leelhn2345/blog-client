@@ -27,9 +27,7 @@ export default function RootLayout({
         suppressHydrationWarning={true}
       >
         <Header />
-        <main className="flex-1 border-b">
-          <div className="container">{children}</div>
-        </main>
+        <main className="flex flex-1 border-b">{children}</main>
         <Footer />
       </body>
     </html>
