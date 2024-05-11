@@ -32,7 +32,7 @@ export function Footer() {
           </Link>{" "}
           and{" "}
           <Link
-            href="#"
+            href="https://github.com/leelhn2345/turtle-bot"
             className="font-medium underline underline-offset-4"
             target="_blank"
           >

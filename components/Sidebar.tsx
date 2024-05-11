@@ -9,6 +9,7 @@ import {
   SheetTrigger,
 } from "./ui/sheet";
 import Link from "next/link";
+import navigationData from "../data/navigation.json";
 
 export function Sidebar() {
   return (
@@ -29,29 +30,16 @@ export function Sidebar() {
           </SheetTitle>
         </SheetHeader>
         <div className="mt-4 flex flex-col gap-y-2">
-          <SheetClose asChild>
-            <Link className="font-semibold hover:text-teal-600" href="/">
-              Home
-            </Link>
-          </SheetClose>
-          <SheetClose asChild>
-            <Link
-              className="font-semibold hover:text-teal-600"
-              href="/projects"
-            >
-              Projects
-            </Link>
-          </SheetClose>
-          <SheetClose asChild>
-            <Link className="font-semibold hover:text-teal-600" href="/blog">
-              Blog
-            </Link>
-          </SheetClose>
-          <SheetClose asChild>
-            <Link className="font-semibold hover:text-teal-600" href="/contact">
-              Contact Me
-            </Link>
-          </SheetClose>
+          {navigationData.map((data) => (
+            <SheetClose asChild key={data.name}>
+              <Link
+                className="font-semibold hover:text-teal-600"
+                href={data.url}
+              >
+                {data.name}
+              </Link>
+            </SheetClose>
+          ))}
         </div>
       </SheetContent>
     </Sheet>

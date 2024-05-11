@@ -1,8 +1,8 @@
 import { Resume } from "@/components/resume/Resume";
-import { ContactButtons } from "../components/ContactButtons";
+import { ContactButtons } from "../../components/ContactButtons";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
-import profileImage from "../public/profile.jpg";
+import profileImage from "../../public/profile.jpg";
 
 export default function Home() {
   return (
