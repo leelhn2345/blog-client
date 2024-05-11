@@ -18,12 +18,12 @@ export function Sidebar() {
         <Button
           variant="link"
           size="icon"
-          className="justify-start hover:text-teal-600 sm:hidden"
+          className="justify-start hover:text-teal-600"
         >
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-64">
+      <SheetContent side="left" className="w-64 dark:bg-black/75">
         <SheetHeader>
           <SheetTitle>
             <Leaf className="mr-4 text-teal-600" />
