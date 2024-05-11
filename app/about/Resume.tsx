@@ -60,7 +60,9 @@ export function Resume() {
   return (
     <Accordion type="multiple">
       <AccordionItem value="item-1">
-        <AccordionTrigger>About Me</AccordionTrigger>
+        <AccordionTrigger className="text-lg font-bold">
+          About Me
+        </AccordionTrigger>
         <AccordionContent>
           Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit
           enim labore culpa sint ad nisi Lorem pariatur mollit ex esse
@@ -76,19 +78,25 @@ export function Resume() {
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">
-        <AccordionTrigger>Skills</AccordionTrigger>
+        <AccordionTrigger className="text-lg font-bold">
+          Skills
+        </AccordionTrigger>
         <AccordionContent>
           Yes. It adheres to the WAI-ARIA design pattern.
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-3">
-        <AccordionTrigger>Experiences</AccordionTrigger>
+        <AccordionTrigger className="text-lg font-bold">
+          Experiences
+        </AccordionTrigger>
         <AccordionContent>
           <JobExperience data={jobExperiencesSample} />
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-4">
-        <AccordionTrigger>Projects</AccordionTrigger>
+        <AccordionTrigger className="text-lg font-bold">
+          Projects
+        </AccordionTrigger>
         <AccordionContent>
           <Projects data={projectSample} />
         </AccordionContent>
