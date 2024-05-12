@@ -23,7 +23,7 @@ export function Sidebar() {
           <Menu />
         </Button>
       </SheetTrigger>
-      <SheetContent side="left" className="w-64 dark:bg-black/75">
+      <SheetContent side="left" className="w-64 dark:bg-background/80">
         <SheetHeader>
           <SheetTitle>
             <Leaf className="mr-4 text-teal-600" />

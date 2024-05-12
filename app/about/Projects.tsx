@@ -11,7 +11,7 @@ type ProjectProp = {
 };
 export function Projects({ data }: ProjectProp) {
   return (
-    <>
+    <div className="mt-4">
       {data.map((x) => (
         <div key={x.name} className="mb-8">
           <Link
@@ -28,6 +28,6 @@ export function Projects({ data }: ProjectProp) {
           </ul>
         </div>
       ))}
-    </>
+    </div>
   );
 }

@@ -19,10 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          "flex min-h-screen flex-col antialiased dark:bg-[#010101] dark:text-white",
+          "flex min-h-screen flex-col antialiased",
           inter.className,
         )}
         suppressHydrationWarning={true}

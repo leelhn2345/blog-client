@@ -20,7 +20,7 @@ export default function Home() {
             <h1 className="mb-4 text-2xl font-bold">
               <span className="text-gray-400">Lee Lai Hon</span> Nelson
             </h1>
-            <h3 className="mb-4">Software Engineer</h3>
+            <h3 className="mb-4">Software Engineer | Fullstack Developer</h3>
             <p className="text-sm">B.Eng | Electrical Engineering</p>
             <p className="text-sm">National University of Singapore</p>
           </div>

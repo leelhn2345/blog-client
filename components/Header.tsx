@@ -26,9 +26,8 @@ export function Header() {
     <header
       // className="sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur
       //   supports-[backdrop-filter]:bg-background/60"
-      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95
-        backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:bg-black/90
-        dark:supports-[backdrop-filter]:bg-black/60"
+      className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90
+        backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
       <div className="container flex h-14 justify-between">
         <div className="my-auto md:hidden">
