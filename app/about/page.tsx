@@ -8,12 +8,12 @@ export default function Home() {
   return (
     <div className="container my-8 md:grid md:grid-cols-4 md:gap-x-64">
       <div className="w-full pt-4 text-center md:text-left">
-        <section className="md:fixed">
+        <section className="md:fixed md:w-1/4">
           <div className="mb-8 pl-3">
             <Image
               width={200}
               priority
-              className="mx-auto mb-6 rounded-3xl dark:border-2 dark:border-white"
+              className="mx-auto mb-6 rounded-3xl dark:border-2 dark:border-white md:mx-0"
               src={profileImage}
               alt="profile image"
             />
@@ -24,7 +24,7 @@ export default function Home() {
             <p className="text-sm">B.Eng | Electrical Engineering</p>
             <p className="text-sm">National University of Singapore</p>
           </div>
-          <div className="mb-4 flex items-center justify-center md:mb-0">
+          <div className="mb-4 flex items-center justify-center md:mb-0 md:justify-start">
             <ContactButtons />
           </div>
         </section>

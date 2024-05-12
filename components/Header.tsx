@@ -31,10 +31,10 @@ export function Header() {
         dark:supports-[backdrop-filter]:bg-black/60"
     >
       <div className="container flex h-14 justify-between">
-        <div className="my-auto sm:hidden">
+        <div className="my-auto md:hidden">
           <Sidebar />
         </div>
-        <NavigationMenu className="hidden sm:flex">
+        <NavigationMenu className="hidden md:flex">
           <Leaf className="mr-4 text-teal-600" />
           <NavigationMenuList>
             {navigationData.map((data) => (
