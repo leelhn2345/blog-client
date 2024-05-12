@@ -1,5 +1,11 @@
-# bot - control
+# Digital Garden
 
-> [!WARNING]
-> under active development.
-> not deployed.
+> [!NOTE]
+> Under ***active* development
+> Uses **bun** as runtime.
+>
+> deployed url can be found from repository's description.
+
+## Todos
+
+- [ ] update readme.md
