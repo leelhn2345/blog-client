@@ -12,6 +12,7 @@ export default function Home() {
           <div className="mb-8 pl-3">
             <Image
               width={200}
+              priority
               className="mx-auto mb-6 rounded-3xl dark:border-2 dark:border-white md:mx-0"
               src={profileImage}
               alt="profile image"
