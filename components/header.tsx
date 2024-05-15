@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Leaf, MoonStar, Sun } from "lucide-react";
-import { Sidebar } from "./Sidebar";
+import { Sidebar } from "./sidebar";
 import navigationData from "../data/navigation.json";
 import { Button } from "@/components/ui/button";
 import {

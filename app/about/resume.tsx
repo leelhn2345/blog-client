@@ -4,8 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { JobExperience, TJobExperience } from "./JobExperience";
-import { Projects, TProject } from "./Projects";
+import { JobExperience, TJobExperience } from "./job-experience";
+import { Projects, TProject } from "./projects";
 
 const jobExperiencesSample: TJobExperience[] = [
   {

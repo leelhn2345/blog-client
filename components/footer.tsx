@@ -1,4 +1,4 @@
-import { ContactButtons } from "@/components/ContactButtons";
+import { ContactButtons } from "@/components/contact-buttons";
 import Link from "next/link";
 
 export function Footer() {

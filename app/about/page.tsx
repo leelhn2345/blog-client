@@ -1,5 +1,5 @@
-import { Resume } from "./Resume";
-import { ContactButtons } from "../../components/ContactButtons";
+import { Resume } from "./resume";
+import { ContactButtons } from "../../components/contact-buttons";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import profileImage from "../../public/profile.jpg";
