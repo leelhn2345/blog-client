@@ -10,8 +10,10 @@ import {
 } from "./ui/sheet";
 import Link from "next/link";
 import navigationData from "../data/navigation.json";
+import { usePathname } from "next/navigation";
 
 export function Sidebar() {
+  const pathname = usePathname();
   return (
     <Sheet>
       <SheetTrigger asChild className="flex">
@@ -33,7 +35,7 @@ export function Sidebar() {
           {navigationData.map((data) => (
             <SheetClose asChild key={data.name}>
               <Link
-                className="font-semibold hover:text-teal-600"
+                className={`font-semibold ${pathname === data.url ? "text-teal-600" : "hover:text-teal-600"}`}
                 href={data.url}
               >
                 {data.name}

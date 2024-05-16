@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import Link from "next/link";
 import { Leaf, MoonStar, Sun } from "lucide-react";
-import { Sidebar } from "./Sidebar";
+import { Sidebar } from "./sidebar";
 import navigationData from "../data/navigation.json";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,9 +19,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useTheme } from "next-themes";
+import { usePathname } from "next/navigation";
 
 export function Header() {
   const { setTheme } = useTheme();
+  const pathname = usePathname();
   return (
     <header
       // className="sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur
@@ -39,7 +41,10 @@ export function Header() {
             {navigationData.map((data) => (
               <NavigationMenuItem key={data.name}>
                 <Link href={data.url} legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  <NavigationMenuLink
+                    className={navigationMenuTriggerStyle()}
+                    active={pathname === data.url}
+                  >
                     {data.name}
                   </NavigationMenuLink>
                 </Link>
