@@ -1,10 +1,21 @@
-import { Resume } from "./resume";
+import { Resume, ResumeProps } from "./resume";
 import { ContactButtons } from "../../components/contact-buttons";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import profileImage from "../../public/profile.jpg";
+import { UnknownError } from "@/lib/exceptions";
 
-export default function Home() {
+async function getResume(): Promise<ResumeProps> {
+  try {
+    const res = await fetch(`${process.env.BACKEND_URL}/resume`);
+    return res.json();
+  } catch (_) {
+    throw new UnknownError();
+  }
+}
+
+export default async function AboutPage() {
+  const res = await getResume();
   return (
     <div className="container my-8 md:grid md:grid-cols-4 md:gap-x-8">
       <section className="pt-4 text-center md:text-left">
@@ -29,7 +40,12 @@ export default function Home() {
       </section>
       <div className="text-left md:col-span-3">
         <Separator className="md:hidden" />
-        <Resume />
+        <Resume
+          aboutMe={res.aboutMe}
+          jobExperiences={res.jobExperiences}
+          projects={res.projects}
+          skills={res.skills}
+        />
       </div>
     </div>
   );

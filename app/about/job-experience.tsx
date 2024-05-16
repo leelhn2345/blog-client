@@ -1,11 +1,14 @@
 import Link from "next/link";
 
+type JobsInCompany = {
+  description?: string[];
+  jobTitle: string;
+  timeSpan: string;
+};
 export type TJobExperience = {
   companyName: string;
   companyUrl: string;
-  timeSpan: string;
-  occupation: string;
-  responsibilities: string[];
+  jobsInCompany: JobsInCompany[];
 };
 
 type JobExperienceProp = {
@@ -23,24 +26,28 @@ export function JobExperience({ data }: JobExperienceProp) {
           ></div>
           <div className="my-4 flex flex-col gap-2">
             <Link
-              className="text-lg font-semibold hover:text-blue-900 hover:underline
+              className="w-fit text-lg font-semibold hover:text-blue-900 hover:underline
                 hover:underline-offset-4"
               target="_blank"
               href={x.companyUrl}
             >
               <h2>{x.companyName}</h2>
             </Link>
-            <div className="flex items-center justify-between text-base">
-              <h4 className="italic">{x.occupation}</h4>
-              <time className="mb-1 mr-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                {x.timeSpan}
-              </time>
-            </div>
-            <ul className="ml-5 mr-2 list-disc space-y-2 text-justify">
-              {x.responsibilities.map((desc, num) => (
-                <li key={x.companyName + num}>{desc}</li>
-              ))}
-            </ul>
+            {x.jobsInCompany.map((y) => (
+              <div key={y.jobTitle} className="mb-4">
+                <div className="flex items-center justify-between text-base">
+                  <h4 className="my-3 italic">{y.jobTitle}</h4>
+                  <time className="mb-1 mr-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                    {y.timeSpan}
+                  </time>
+                </div>
+                <ul className="ml-5 mr-2 list-disc space-y-2 text-justify">
+                  {y.description?.map((desc, num) => (
+                    <li key={x.companyName + num}>{desc}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </li>
       ))}
