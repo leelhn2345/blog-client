@@ -26,8 +26,6 @@ export function Header() {
   const pathname = usePathname();
   return (
     <header
-      // className="sticky top-0 z-50 w-full border-b border-border/40 backdrop-blur
-      //   supports-[backdrop-filter]:bg-background/60"
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90
         backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
@@ -52,7 +50,7 @@ export function Header() {
             ))}
           </NavigationMenuList>
         </NavigationMenu>
-        <div className="flex items-center">
+        <div className="flex items-center gap-x-2">
           {" "}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -80,6 +78,9 @@ export function Header() {
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <Button>
+            <Link href="/auth">Login / Register</Link>
+          </Button>
         </div>
       </div>
     </header>
