@@ -5,6 +5,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -35,6 +36,7 @@ export default function RootLayout({
         >
           <Header />
           <main className="flex flex-1 border-b">{children}</main>
+          <Toaster position="top-right" richColors />
           <Footer />
         </ThemeProvider>
       </body>
