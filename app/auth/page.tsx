@@ -17,7 +17,7 @@ enum SignType {
 export default function AuthPage() {
   return (
     <div className="container my-20 flex justify-center">
-      <Tabs defaultValue={SignType.SIGN_IN} className="w-[400px]">
+      <Tabs defaultValue={SignType.SIGN_IN} className="w-full sm:w-[400px]">
         <TabsList className="grid grid-cols-2">
           <TabsTrigger value={SignType.SIGN_IN}>Login</TabsTrigger>
           <TabsTrigger value={SignType.SIGN_UP}>Register</TabsTrigger>
