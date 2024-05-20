@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0",
-    "prepare": "husky"
+    "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json,yaml,yml,css}'"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^9.4.1",
@@ -37,8 +37,8 @@
     "cssnano": "^7.0.1",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
-    "husky": "^9.0.11",
     "postcss": "^8",
+    "prettier": "^3.2.5",
     "prettier-plugin-classnames": "^0.6.6",
     "prettier-plugin-merge": "^0.6.0",
     "prettier-plugin-tailwindcss": "^0.5.14",
