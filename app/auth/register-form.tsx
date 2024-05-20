@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { registerUser } from "./actions";
+import { useTransition } from "react";
 
 const registerFormSchema = z.object({
   username: z.string().email("Invalid email format"),
@@ -36,6 +37,7 @@ const registerFormSchema = z.object({
 });
 
 export function RegisterForm() {
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -56,7 +58,12 @@ export function RegisterForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit((data) =>
+          startTransition(() => onSubmit(data)),
+        )}
+        className="space-y-4"
+      >
         <FormField
           control={form.control}
           name="username"
@@ -110,7 +117,9 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "Loading..." : "Submit"}
+        </Button>
       </form>
     </Form>
   );

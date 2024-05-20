@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { loginUser } from "./actions";
+import { useTransition } from "react";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
@@ -34,6 +35,7 @@ const loginFormSchema = z.object({
 });
 
 export function LoginForm() {
+  const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -52,7 +54,12 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form
+        onSubmit={form.handleSubmit((data) =>
+          startTransition(() => onSubmit(data)),
+        )}
+        className="space-y-4"
+      >
         <FormField
           control={form.control}
           name="username"
@@ -80,7 +87,9 @@ export function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" disabled={isPending}>
+          {isPending ? "Loading..." : "Submit"}
+        </Button>
       </form>
     </Form>
   );
