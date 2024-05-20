@@ -9,7 +9,7 @@ export default function Home() {
       >
         Digital Garden
       </h1>
-      <TreePine className="animate-tree h-48 w-48 lg:h-64 lg:w-64" />
+      <TreePine className="h-48 w-48 animate-tree lg:h-64 lg:w-64" />
       <div className="mt-2 space-y-4">
         <p className="font-semibold">
           This site serves as a software experimental test bed.
