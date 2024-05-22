@@ -5,19 +5,17 @@ type UserLoginCreds = {
   password: string;
 };
 
-export async function loginUser({
-  username,
-  password,
-}: UserLoginCreds): Promise<unknown> {
-  try {
-    console.log(username);
-    console.log(password);
-    const res = await fetch(`${process.env.BACKEND_URL}/login`, {
-      method: "POST",
-    });
-    return res.json();
-  } catch (_) {
-    throw new Error();
+export async function loginUser(userLoginCreds: UserLoginCreds) {
+  const res = await fetch(`${process.env.BACKEND_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(userLoginCreds),
+  });
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message);
   }
 }
 
@@ -28,22 +26,24 @@ type NewUserCreds = {
   lastName: string;
 };
 
-export async function registerUser({
-  username,
-  password,
-  firstName,
-  lastName,
-}: NewUserCreds): Promise<unknown> {
-  try {
-    console.log(username);
-    console.log(password);
-    console.log(firstName);
-    console.log(lastName);
-    const res = await fetch(`${process.env.BACKEND_URL}/register`, {
-      method: "POST",
-    });
-    return res.json();
-  } catch (_) {
-    throw new Error();
+export async function registerUser(newUserCreds: NewUserCreds) {
+  const z = {
+    accountDetails: {
+      username: newUserCreds.username,
+      password: newUserCreds.password,
+    },
+    firstName: newUserCreds.firstName,
+    lastName: newUserCreds.lastName,
+  };
+  const res = await fetch(`${process.env.BACKEND_URL}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(z),
+  });
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message);
   }
 }

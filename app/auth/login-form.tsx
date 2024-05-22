@@ -46,9 +46,9 @@ export function LoginForm() {
 
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     toast.promise(() => loginUser(values), {
-      loading: "Loading...",
+      loading: "loading...",
       success: "success",
-      error: "not yet implemented",
+      error: (data) => data,
     });
   }
 

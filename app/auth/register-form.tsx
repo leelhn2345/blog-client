@@ -50,9 +50,10 @@ export function RegisterForm() {
 
   function onSubmit(values: z.infer<typeof registerFormSchema>) {
     toast.promise(() => registerUser(values), {
-      loading: "Loading...",
+      loading: "loading...",
       success: "success",
-      error: "not yet implemented",
+      error: (data) => data,
+      position: "top-center",
     });
   }
 
