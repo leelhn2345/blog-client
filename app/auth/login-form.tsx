@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { UnknownError } from "@/lib/exceptions";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
@@ -38,28 +39,36 @@ export function LoginForm() {
   });
 
   async function loginUser(userLoginCreds: LoginCreds) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userLoginCreds),
-      credentials: "include",
-    });
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message);
-    }
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_AUTH_URL}/user/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userLoginCreds),
+          credentials: "include",
+        },
+      );
+      if (!res.ok) {
+        const error = await res.json();
+        throw new Error(error.message);
+      }
 
-    router.push("/");
-    router.refresh();
+      router.push("/");
+      router.refresh();
+    } catch (_) {
+      throw new UnknownError();
+    }
   }
 
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     toast.promise(() => loginUser(values), {
       loading: "loading...",
-      success: "success",
+      success: "logged in",
       error: (data) => data,
+      duration: 1000,
     });
   }
 

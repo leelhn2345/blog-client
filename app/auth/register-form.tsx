@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
+import { UnknownError } from "@/lib/exceptions";
 
 const newUserFormSchema = z
   .object({
@@ -44,18 +45,24 @@ const newUserFormSchema = z
 type NewUserCreds = z.infer<typeof newUserFormSchema>;
 
 export async function registerUser(newUserCreds: NewUserCreds) {
-  console.log(newUserCreds);
-  const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/user/sign-up`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(newUserCreds),
-    credentials: "include",
-  });
-  if (!res.ok) {
-    const error = await res.json();
-    throw new Error(error.message);
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_AUTH_URL}/user/sign-up`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserCreds),
+        credentials: "include",
+      },
+    );
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+  } catch (_) {
+    throw new UnknownError();
   }
 }
 
@@ -74,9 +81,9 @@ export function RegisterForm() {
   function onSubmit(values: z.infer<typeof newUserFormSchema>) {
     toast.promise(() => registerUser(values), {
       loading: "loading...",
-      success: "success",
+      success: "profile created",
       error: (data) => data,
-      position: "top-center",
+      duration: 1000,
     });
   }
 

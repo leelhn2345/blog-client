@@ -10,7 +10,7 @@ import {
 import { Leaf } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import navigationData from "../data/navigation.json";
+import navigationData from "../../data/navigation.json";
 
 export function NavBar() {
   const pathname = usePathname();
