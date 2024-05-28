@@ -1,8 +1,9 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      BACKEND_URL: string;
       // add more environment variables and their types here
+      BACKEND_URL: string;
+      NEXT_PUBLIC_AUTH_URL: string;
     }
   }
 }
