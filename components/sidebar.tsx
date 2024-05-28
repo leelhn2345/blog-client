@@ -1,3 +1,5 @@
+"use client";
+
 import { Leaf, Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import {
