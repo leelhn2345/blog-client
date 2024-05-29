@@ -18,7 +18,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { UnknownError } from "@/lib/exceptions";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
