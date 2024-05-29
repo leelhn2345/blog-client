@@ -6,11 +6,11 @@ import { cookies } from "next/headers";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
-import { AppCookies } from "@/lib/cookies";
+import { AppCookies } from "@/lib/session";
 
 export function Header() {
   const cookieJar = cookies();
-  const user = cookieJar.has(AppCookies.GARDENER);
+  const user = cookieJar.has(AppCookies.USER_ID);
   return (
     <header
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90

@@ -8,14 +8,14 @@ type ErrorProps = {
   reset: () => void;
 };
 
-export default function Error({ reset }: ErrorProps) {
+export default function ErrorPage({ reset }: ErrorProps) {
   return (
     <div className="container flex flex-col items-center justify-center gap-y-6">
       <h1
         className="bg-gradient-to-bl from-red-800 to-purple-400 bg-clip-text text-center text-4xl
           font-bold text-transparent dark:bg-gradient-to-tr dark:to-purple-800"
       >
-        Unknown Error
+        Internal Server Error
       </h1>
       <p>Sorry, we couldn{"'"}t find the resources you requested.</p>
       <div className="space-x-9">
