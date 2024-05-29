@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
+import { testLogin } from "./actions";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
@@ -46,17 +47,18 @@ export function LoginForm() {
       body: JSON.stringify(userLoginCreds),
       credentials: "include",
     });
+    console.log(res.headers.getSetCookie());
     if (!res.ok) {
       const error = await res.json();
       throw new Error(error.message);
     }
 
-    router.push("/");
-    router.refresh();
+    // router.push("/");
+    // router.refresh();
   }
 
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    toast.promise(() => loginUser(values), {
+    toast.promise(() => testLogin(values), {
       loading: "loading...",
       success: "welcome back",
       error: (data) => data,
