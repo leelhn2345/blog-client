@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { loginUser } from "./actions";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
@@ -28,7 +28,6 @@ type LoginCreds = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const form = useForm<LoginCreds>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -36,24 +35,6 @@ export function LoginForm() {
       password: "",
     },
   });
-
-  async function loginUser(userLoginCreds: LoginCreds) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/user/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userLoginCreds),
-      credentials: "include",
-    });
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message);
-    }
-
-    router.push("/");
-    router.refresh();
-  }
 
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     toast.promise(() => loginUser(values), {
