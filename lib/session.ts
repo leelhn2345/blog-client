@@ -1,5 +1,10 @@
 import { cookies } from "next/headers";
 
+/**
+ * cookies are from these routes
+ *  - `/user/login`
+ *  - `/user/sign-up`
+ */
 export enum AppCookies {
   USER_ID = "gardener.id",
   USER_INFO = "userInfo",
