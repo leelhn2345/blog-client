@@ -1,8 +1,33 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-export async function testLogin(userLoginCreds: Record<string, string>) {
+function saveCookies(res: Response) {
+  const cookieResponse = res.headers.getSetCookie();
+
+  const sessionCookies = cookieResponse.map((cookieString) => {
+    const [key, ...value] = cookieString.split("=");
+
+    return [key, value.join("=").split(";")[0]];
+  });
+
+  sessionCookies.map((cookie) =>
+    cookies().set({
+      name: cookie[0],
+      value: cookie[1],
+      sameSite: "strict",
+      httpOnly: true,
+      path: "/",
+      secure: true,
+      expires: Date.now() + 60 * 60 * 24 * 7 * 4 * 1000, // 4 weeks from now
+    }),
+  );
+
+  redirect("/");
+}
+
+export async function loginUser(userLoginCreds: Record<string, string>) {
   const res = await fetch(`${process.env.BACKEND_URL}/user/login`, {
     method: "POST",
     headers: {
@@ -15,22 +40,23 @@ export async function testLogin(userLoginCreds: Record<string, string>) {
     const error = await res.json();
     throw new Error(error.message);
   }
-  const cookieResponse = res.headers.getSetCookie();
-  const sessionCookies = cookieResponse.map((cookieString) => {
-    const [key, ...value] = cookieString.split("=");
-    return [key, value.join("=").split(";")[0]];
+  saveCookies(res);
+}
+
+export async function registerUser(newUserCreds: Record<string, string>) {
+  const res = await fetch(`${process.env.BACKEND_URL}/user/sign-up`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(newUserCreds),
+    credentials: "include",
   });
-  console.log(sessionCookies);
-  sessionCookies.map((cookie) =>
-    cookies().set({
-      name: cookie[0],
-      value: cookie[1],
-      sameSite: "strict",
-      httpOnly: true,
-      path: "/",
-      secure: true,
-      expires: Date.now() + 60 * 60 * 24 * 7 * 4 * 1000,
-    }),
-  );
-  console.log(cookies().getAll());
+
+  if (!res.ok) {
+    const error = await res.json();
+    throw new Error(error.message);
+  }
+
+  saveCookies(res);
 }

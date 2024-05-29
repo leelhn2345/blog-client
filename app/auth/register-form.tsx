@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { registerUser } from "./actions";
 
 const newUserFormSchema = z
   .object({
@@ -46,7 +46,6 @@ type NewUserCreds = z.infer<typeof newUserFormSchema>;
 
 export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
-  const router = useRouter();
   const form = useForm<NewUserCreds>({
     resolver: zodResolver(newUserFormSchema),
     defaultValues: {
@@ -56,26 +55,6 @@ export function RegisterForm() {
       lastName: "",
     },
   });
-
-  async function registerUser(newUserCreds: NewUserCreds) {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_AUTH_URL}/user/sign-up`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newUserCreds),
-        credentials: "include",
-      },
-    );
-    if (!res.ok) {
-      const error = await res.json();
-      throw new Error(error.message);
-    }
-    router.push("/");
-    router.refresh();
-  }
 
   function onSubmit(values: z.infer<typeof newUserFormSchema>) {
     toast.promise(() => registerUser(values), {
