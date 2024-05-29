@@ -36,7 +36,7 @@ export default function RootLayout({
         >
           <Header />
           <main className="flex flex-1 border-b">{children}</main>
-          <Toaster position="top-right" richColors />
+          <Toaster position="top-right" duration={1000} richColors />
           <Footer />
         </ThemeProvider>
       </body>

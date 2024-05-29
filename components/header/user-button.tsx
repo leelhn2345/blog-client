@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UnknownError } from "@/lib/exceptions";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 export function UserButton() {
   const router = useRouter();
@@ -24,6 +25,7 @@ export function UserButton() {
           credentials: "include",
         },
       );
+      toast.success("logged out");
       router.refresh();
       if (!res.ok) {
         const error = await res.json();

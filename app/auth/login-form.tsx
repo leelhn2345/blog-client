@@ -66,7 +66,7 @@ export function LoginForm() {
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     toast.promise(() => loginUser(values), {
       loading: "loading...",
-      success: "logged in",
+      success: "welcome back",
       error: (data) => data,
       duration: 1000,
     });
