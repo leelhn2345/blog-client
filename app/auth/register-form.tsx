@@ -16,30 +16,39 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { registerUser } from "./actions";
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 
-const registerFormSchema = z.object({
-  username: z.string().email("Invalid email format"),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters long")
-    .max(20, "Password must be at most 20 characters long")
-    .regex(
-      /[!@#$%^&*~(),.?":{}|<>]/,
-      "Password must contain at least one special character",
-    )
-    .regex(/[0-9]/, "Password must contain at least one number")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter"),
-  firstName: z.string().min(1, "first name is required"),
-  lastName: z.string(),
-});
+const newUserFormSchema = z
+  .object({
+    username: z.string().email("Invalid email format"),
+    password: z
+      .string()
+      .min(8, "Password must be at least 8 characters long")
+      .max(20, "Password must be at most 20 characters long")
+      .regex(
+        /[!@#$%^&*~(),.?":{}|<>]/,
+        "Password must contain at least one special character",
+      )
+      .regex(/[0-9]/, "Password must contain at least one number")
+      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
+      .regex(/[a-z]/, "Password must contain at least one lowercase letter"),
+    firstName: z.string().min(1, "first name is required"),
+    lastName: z.string(),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
+
+type NewUserCreds = z.infer<typeof newUserFormSchema>;
 
 export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof registerFormSchema>>({
-    resolver: zodResolver(registerFormSchema),
+  const router = useRouter();
+  const form = useForm<NewUserCreds>({
+    resolver: zodResolver(newUserFormSchema),
     defaultValues: {
       username: "",
       password: "",
@@ -48,11 +57,32 @@ export function RegisterForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof registerFormSchema>) {
+  async function registerUser(newUserCreds: NewUserCreds) {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_AUTH_URL}/user/sign-up`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newUserCreds),
+        credentials: "include",
+      },
+    );
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+    router.push("/");
+    router.refresh();
+  }
+
+  function onSubmit(values: z.infer<typeof newUserFormSchema>) {
     toast.promise(() => registerUser(values), {
-      loading: "Loading...",
-      success: "success",
-      error: "not yet implemented",
+      loading: "loading...",
+      success: "profile created",
+      error: (data) => data,
+      duration: 1000,
     });
   }
 
@@ -71,7 +101,7 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input required {...field} />
               </FormControl>
               <FormDescription>This will be your username.</FormDescription>
               <FormMessage />
@@ -85,8 +115,22 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" autoComplete="off" {...field} />
+                <Input required type="password" autoComplete="off" {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="confirmPassword"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <Input required type="password" autoComplete="off" {...field} />
+              </FormControl>
+              <FormDescription>Please retype your password</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -98,7 +142,7 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>First Name</FormLabel>
               <FormControl>
-                <Input placeholder="Joe" {...field} />
+                <Input required placeholder="Joe" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

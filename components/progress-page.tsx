@@ -16,8 +16,8 @@ export function ProgressPage({ pageName }: ProgressPageProp) {
           ~ In Progress ~
         </h1>
         <p className="">
-          Sorry, <span className="text-xl font-bold">{pageName}</span> is not
-          available currently.
+          Sorry, <span className="text-xl font-bold">{pageName}</span> is
+          currently not available.
         </p>
         <Button>
           <Link href="/">Return Home</Link>

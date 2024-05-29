@@ -1,5 +1,7 @@
+"use client";
+
 import { Leaf, Menu } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import {
   Sheet,
   SheetClose,
@@ -7,9 +9,9 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "./ui/sheet";
+} from "../ui/sheet";
 import Link from "next/link";
-import navigationData from "../data/navigation.json";
+import navigationData from "../../data/navigation.json";
 import { usePathname } from "next/navigation";
 
 export function Sidebar() {

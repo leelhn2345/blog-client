@@ -16,27 +16,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { loginUser } from "./actions";
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
-  password: z
-    .string()
-    .min(8, "Password must be at least 8 characters long")
-    .max(20, "Password must be at most 20 characters long")
-    .regex(
-      /[!@#$%^&*~(),.?":{}|<>]/,
-      "Password must contain at least one special character",
-    )
-    .regex(/[0-9]/, "Password must contain at least one number")
-    .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .regex(/[a-z]/, "Password must contain at least one lowercase letter"),
+  password: z.string(),
 });
+
+type LoginCreds = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
-  const form = useForm<z.infer<typeof loginFormSchema>>({
+  const router = useRouter();
+  const form = useForm<LoginCreds>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
       username: "",
@@ -44,11 +37,30 @@ export function LoginForm() {
     },
   });
 
+  async function loginUser(userLoginCreds: LoginCreds) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_AUTH_URL}/user/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userLoginCreds),
+      credentials: "include",
+    });
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.message);
+    }
+
+    router.push("/");
+    router.refresh();
+  }
+
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     toast.promise(() => loginUser(values), {
-      loading: "Loading...",
-      success: "success",
-      error: "not yet implemented",
+      loading: "loading...",
+      success: "welcome back",
+      error: (data) => data,
+      duration: 1000,
     });
   }
 
@@ -67,7 +79,7 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input required {...field} />
               </FormControl>
               <FormDescription>This will be your username.</FormDescription>
               <FormMessage />
@@ -81,7 +93,7 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type="password" autoComplete="off" {...field} />
+                <Input required type="password" autoComplete="off" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
