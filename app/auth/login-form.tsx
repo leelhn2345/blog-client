@@ -40,7 +40,7 @@ export function LoginForm() {
     toast.promise(() => loginUser(values), {
       loading: "loading...",
       success: "welcome back",
-      error: (data) => data,
+      error: "invalid credentials",
       duration: 1000,
     });
   }

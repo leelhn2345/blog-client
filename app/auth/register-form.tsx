@@ -33,9 +33,9 @@ const newUserFormSchema = z
       .regex(/[0-9]/, "Password must contain at least one number")
       .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
       .regex(/[a-z]/, "Password must contain at least one lowercase letter"),
+    confirmPassword: z.string(),
     firstName: z.string().min(1, "first name is required"),
     lastName: z.string(),
-    confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match",
@@ -60,8 +60,7 @@ export function RegisterForm() {
     toast.promise(() => registerUser(values), {
       loading: "loading...",
       success: "profile created",
-      error: (data) => data,
-      duration: 1000,
+      error: "username is taken",
     });
   }
 
