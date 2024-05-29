@@ -36,7 +36,7 @@ export function UserButton() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
+        <Button variant="ghost">
           <UserRoundCheck />
         </Button>
       </DropdownMenuTrigger>

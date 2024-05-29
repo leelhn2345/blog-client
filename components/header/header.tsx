@@ -9,7 +9,7 @@ import { UserRound } from "lucide-react";
 
 export function Header() {
   const cookieJar = cookies();
-  const user = cookieJar.get("gardener.id");
+  const user = cookieJar.has("gardener.id");
   return (
     <header
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90
