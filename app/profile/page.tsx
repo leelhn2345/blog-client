@@ -20,7 +20,6 @@ async function fetchUserInfo() {
 
 export default async function ProfilePage() {
   const userInfo = await fetchUserInfo();
-  console.log(userInfo);
   return (
     <div className="container flex flex-col items-center justify-center">
       <h1>

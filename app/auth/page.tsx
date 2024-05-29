@@ -8,6 +8,9 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { LoginForm } from "./login-form";
 import { RegisterForm } from "./register-form";
+import { cookies } from "next/headers";
+import { AppCookies } from "@/lib/cookies.type";
+import { redirect } from "next/navigation";
 
 enum SignType {
   SIGN_IN = "signIn",
@@ -15,8 +18,10 @@ enum SignType {
 }
 
 export default function AuthPage() {
+  const user = cookies().has(AppCookies.USER_ID);
+  if (user) redirect("/");
   return (
-    <div className="container my-20 flex justify-center">
+    <div className="container my-10 flex justify-center">
       <Tabs defaultValue={SignType.SIGN_IN} className="w-full max-w-[400px]">
         <TabsList className="grid grid-cols-2">
           <TabsTrigger value={SignType.SIGN_IN}>Login</TabsTrigger>
@@ -26,7 +31,7 @@ export default function AuthPage() {
           <Card>
             <CardHeader>
               <CardTitle>Login</CardTitle>
-              <CardDescription>Welcome Back</CardDescription>
+              <CardDescription>Welcome back</CardDescription>
             </CardHeader>
             <CardContent>
               <LoginForm />

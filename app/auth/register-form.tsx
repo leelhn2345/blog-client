@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { registerUser } from "./actions";
+import { useRouter } from "next/navigation";
 
 const newUserFormSchema = z
   .object({
@@ -46,6 +47,7 @@ type NewUserCreds = z.infer<typeof newUserFormSchema>;
 
 export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const form = useForm<NewUserCreds>({
     resolver: zodResolver(newUserFormSchema),
     defaultValues: {
@@ -59,7 +61,10 @@ export function RegisterForm() {
   function onSubmit(values: z.infer<typeof newUserFormSchema>) {
     toast.promise(() => registerUser(values), {
       loading: "loading...",
-      success: "profile created",
+      success: () => {
+        router.refresh();
+        return "profile created";
+      },
       error: "username is taken",
     });
   }
@@ -81,7 +86,7 @@ export function RegisterForm() {
               <FormControl>
                 <Input required {...field} />
               </FormControl>
-              <FormDescription>This will be your username.</FormDescription>
+              <FormDescription>This is your username.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -108,7 +113,7 @@ export function RegisterForm() {
               <FormControl>
                 <Input required type="password" autoComplete="off" {...field} />
               </FormControl>
-              <FormDescription>Please retype your password</FormDescription>
+              <FormDescription>Please retype your password.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

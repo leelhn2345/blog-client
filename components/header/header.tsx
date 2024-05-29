@@ -6,8 +6,8 @@ import { cookies } from "next/headers";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { UserRound } from "lucide-react";
-import { AppCookies } from "@/lib/session";
-import { redirect } from "next/navigation";
+import { sessionLogout } from "@/lib/session";
+import { AppCookies } from "@/lib/cookies.type";
 
 export function Header() {
   const cookieJar = cookies();
@@ -15,13 +15,9 @@ export function Header() {
 
   async function logout() {
     "use server";
-    await fetch(`${process.env.BACKEND_URL}/user/logout`, {
-      method: "POST",
-    });
-    const appCookies = Object.values(AppCookies);
-    appCookies.map((cookieName) => cookies().delete(cookieName));
-    redirect("/");
+    await sessionLogout();
   }
+
   return (
     <header
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90

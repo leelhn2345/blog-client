@@ -10,8 +10,13 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
-export function UserButton({ logout }: { logout: () => Promise<void> }) {
+type Props = {
+  logout: () => Promise<void>;
+};
+export function UserButton({ logout }: Props) {
+  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -25,6 +30,7 @@ export function UserButton({ logout }: { logout: () => Promise<void> }) {
         <DropdownMenuItem
           onClick={async () => {
             await logout();
+            router.refresh();
             toast.success("logged out");
           }}
         >

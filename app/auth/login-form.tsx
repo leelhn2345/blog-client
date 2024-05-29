@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
 import { loginUser } from "./actions";
+import { useRouter } from "next/navigation";
 
 const loginFormSchema = z.object({
   username: z.string().email("Invalid email format"),
@@ -28,6 +29,7 @@ type LoginCreds = z.infer<typeof loginFormSchema>;
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const form = useForm<LoginCreds>({
     resolver: zodResolver(loginFormSchema),
     defaultValues: {
@@ -39,7 +41,10 @@ export function LoginForm() {
   function onSubmit(values: z.infer<typeof loginFormSchema>) {
     toast.promise(() => loginUser(values), {
       loading: "loading...",
-      success: "welcome back",
+      success: () => {
+        router.refresh();
+        return "welcome back";
+      },
       error: "invalid credentials",
       duration: 1000,
     });
@@ -62,7 +67,6 @@ export function LoginForm() {
               <FormControl>
                 <Input required {...field} />
               </FormControl>
-              <FormDescription>This will be your username.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -76,6 +80,11 @@ export function LoginForm() {
               <FormControl>
                 <Input required type="password" autoComplete="off" {...field} />
               </FormControl>
+              <FormDescription>
+                <span className="hover:cursor-pointer hover:underline">
+                  Forgot Password
+                </span>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}

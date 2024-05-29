@@ -1,6 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { AppCookies } from "./lib/session";
+import { AppCookies } from "./lib/cookies.type";
 
 /**
  * for more info
@@ -10,15 +10,12 @@ import { AppCookies } from "./lib/session";
 export async function middleware(request: NextRequest) {
   const currentUser = request.cookies.has(AppCookies.USER_ID);
 
-  if (currentUser && request.nextUrl.pathname.startsWith("/auth")) {
-    return NextResponse.redirect(new URL("/", request.url));
+  if (!currentUser) {
+    return NextResponse.redirect(new URL("/auth", request.url));
   }
-
-  if (!currentUser && !request.nextUrl.pathname.startsWith("/auth"))
-    return NextResponse.redirect(new URL("/unauthorized", request.url));
 }
 
 export const config = {
   // here are the routes that will trigger middleware
-  matcher: ["/auth", "/profile"],
+  matcher: ["/profile"],
 };
