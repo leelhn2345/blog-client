@@ -1,23 +1,23 @@
 import { ProgressPage } from "@/components/progress-page";
 import { UnknownError } from "@/lib/exceptions";
-import { getUserInfo } from "@/lib/session";
+import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 async function fetchUserInfo() {
-  try {
-    const res = await fetch(`${process.env.BACKEND_URL}/user/user-info`, {
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: cookies().toString(),
-      },
-    });
+  const res = await fetch(`${process.env.BACKEND_URL}/user/user-info`, {
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookies().toString(),
+    },
+  });
 
-    if (!res.ok) throw new Error("can't get user info");
-    return res.json();
-  } catch (_) {
-    throw new UnknownError();
-  }
+  if (res.status == 401) redirect("/unauthorized");
+
+  if (!res.ok) throw new UnknownError();
+
+  return res.json();
 }
+
 export default async function ProfilePage() {
   const userInfo = await fetchUserInfo();
   console.log(userInfo);

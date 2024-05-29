@@ -15,7 +15,7 @@ export default function ErrorPage({ reset }: ErrorProps) {
         className="bg-gradient-to-bl from-red-800 to-purple-400 bg-clip-text text-center text-4xl
           font-bold text-transparent dark:bg-gradient-to-tr dark:to-purple-800"
       >
-        Internal Server Error
+        Bad Request
       </h1>
       <p>Sorry, we couldn{"'"}t find the resources you requested.</p>
       <div className="space-x-9">

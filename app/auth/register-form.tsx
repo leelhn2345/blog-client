@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useTransition } from "react";
-import { UnknownError } from "@/lib/exceptions";
+import { useRouter } from "next/navigation";
 
 const newUserFormSchema = z
   .object({
@@ -44,8 +44,20 @@ const newUserFormSchema = z
 
 type NewUserCreds = z.infer<typeof newUserFormSchema>;
 
-export async function registerUser(newUserCreds: NewUserCreds) {
-  try {
+export function RegisterForm() {
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+  const form = useForm<NewUserCreds>({
+    resolver: zodResolver(newUserFormSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+    },
+  });
+
+  async function registerUser(newUserCreds: NewUserCreds) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_AUTH_URL}/user/sign-up`,
       {
@@ -61,22 +73,9 @@ export async function registerUser(newUserCreds: NewUserCreds) {
       const error = await res.json();
       throw new Error(error.message);
     }
-  } catch (_) {
-    throw new UnknownError();
+    router.push("/");
+    router.refresh();
   }
-}
-
-export function RegisterForm() {
-  const [isPending, startTransition] = useTransition();
-  const form = useForm<NewUserCreds>({
-    resolver: zodResolver(newUserFormSchema),
-    defaultValues: {
-      username: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-    },
-  });
 
   function onSubmit(values: z.infer<typeof newUserFormSchema>) {
     toast.promise(() => registerUser(values), {
