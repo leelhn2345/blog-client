@@ -7,7 +7,9 @@ import { UnknownError } from "@/lib/exceptions";
 
 async function getResume(): Promise<ResumeProps> {
   try {
-    const res = await fetch(`${process.env.BACKEND_URL}/resume`);
+    const res = await fetch(`${process.env.BACKEND_URL}/resume`, {
+      next: { revalidate: 3600 },
+    });
     return res.json();
   } catch (_) {
     throw new UnknownError();
