@@ -35,11 +35,11 @@ export function Header() {
           {user ? (
             <UserButton logout={logout} />
           ) : (
-            <Button variant="ghost">
-              <Link href="/auth">
+            <Link href="/auth">
+              <Button variant="ghost">
                 <UserRound />
-              </Link>
-            </Button>
+              </Button>
+            </Link>
           )}
         </div>
       </div>
