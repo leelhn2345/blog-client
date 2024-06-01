@@ -7,9 +7,9 @@ export default function NotFound() {
       <div className="space-y-4 text-center">
         <h2 className="text-2xl font-bold">Page Not Found</h2>
         <p>We{"'"}re sorry, we could not process your request.</p>
-        <Button>
-          <Link href="/">Return Home</Link>
-        </Button>
+        <Link href="/">
+          <Button>Return Home</Button>
+        </Link>
       </div>
     </div>
   );

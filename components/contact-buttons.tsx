@@ -7,16 +7,16 @@ import Link from "next/link";
 export function ContactButtons() {
   return (
     <>
-      <Button variant="link" className="hover:motion-safe:animate-bounce">
-        <Link href="https://github.com/leelhn2345" target="_blank">
+      <Link href="https://github.com/leelhn2345" target="_blank">
+        <Button variant="link" className="hover:motion-safe:animate-bounce">
           <SiGithub className="dark:fill-white" />
-        </Link>
-      </Button>
-      <Button variant="link" className="hover:motion-safe:animate-bounce">
-        <Link href="https://www.linkedin.com/in/nelson2345/" target="_blank">
+        </Button>
+      </Link>
+      <Link href="https://www.linkedin.com/in/nelson2345/" target="_blank">
+        <Button variant="link" className="hover:motion-safe:animate-bounce">
           <SiLinkedin className="dark:fill-white" />
-        </Link>
-      </Button>
+        </Button>
+      </Link>
       <Button
         variant="link"
         onClick={() => (window.location.href = "mailto:leelhn2345@outlook.com")}
