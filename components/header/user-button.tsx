@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "../ui/button";
-import { LogOut, UserRoundCheck } from "lucide-react";
+import { LogOut, UserCog, UserRoundCheck } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,8 +24,14 @@ export function UserButton({ logout }: Props) {
           <UserRoundCheck />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-36">
+      <DropdownMenuContent className="w-40">
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuItem onClick={() => router.push("/profile")}>
+          <UserCog className="mr-2 h-4 w-4" />
+          <span>Manage Profile</span>
+        </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {

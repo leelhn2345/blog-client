@@ -24,8 +24,10 @@ export async function getPermissionLevel() {
 
 /**
  * login & starts session
+ *
+ * if `staysLoggedIn` = true, stays logged in for 4 weeks
  */
-export async function sessionLogin(res: Response) {
+export async function sessionLogin(res: Response, staysLoggedIn?: boolean) {
   const cookieResponse = res.headers.getSetCookie();
 
   const sessionCookies = cookieResponse.map((cookieString) => {
@@ -33,6 +35,18 @@ export async function sessionLogin(res: Response) {
 
     return [key, value.join("=").split(";")[0]];
   });
+
+  let maxAge: undefined | number;
+  switch (staysLoggedIn) {
+    case true: {
+      maxAge = 1000 * 60 * 60 * 24 * 7 * 4;
+      break;
+    }
+    default: {
+      maxAge = undefined;
+      break;
+    }
+  }
 
   sessionCookies.map((cookie) =>
     cookies().set({
@@ -42,7 +56,7 @@ export async function sessionLogin(res: Response) {
       httpOnly: true,
       path: "/",
       secure: true,
-      expires: Date.now() + 60 * 60 * 24 * 7 * 4 * 1000, // 4 weeks from now
+      maxAge,
     }),
   );
 }

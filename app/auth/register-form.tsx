@@ -1,6 +1,5 @@
 "use client";
 
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -19,31 +18,7 @@ import { toast } from "sonner";
 import { useTransition } from "react";
 import { registerUser } from "./actions";
 import { useRouter } from "next/navigation";
-
-const newUserFormSchema = z
-  .object({
-    username: z.string().email("Invalid email format"),
-    password: z
-      .string()
-      .min(8, "Password must be at least 8 characters long")
-      .max(20, "Password must be at most 20 characters long")
-      .regex(
-        /[!@#$%^&*~(),.?":{}|<>]/,
-        "Password must contain at least one special character",
-      )
-      .regex(/[0-9]/, "Password must contain at least one number")
-      .regex(/[A-Z]/, "Password must contain at least one uppercase letter")
-      .regex(/[a-z]/, "Password must contain at least one lowercase letter"),
-    confirmPassword: z.string(),
-    firstName: z.string().min(1, "first name is required"),
-    lastName: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
-
-type NewUserCreds = z.infer<typeof newUserFormSchema>;
+import { NewUserCreds, newUserFormSchema } from "./schema";
 
 export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
@@ -53,27 +28,34 @@ export function RegisterForm() {
     defaultValues: {
       username: "",
       password: "",
+      confirmPassword: "",
       firstName: "",
       lastName: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof newUserFormSchema>) {
-    toast.promise(() => registerUser(values), {
-      loading: "loading...",
-      success: () => {
-        router.refresh();
-        return "profile created";
-      },
-      error: "username is taken",
-    });
+  async function onSubmit(values: NewUserCreds) {
+    const data = {
+      ...values,
+      username: values.username.toLowerCase(),
+    };
+    const loading = toast("loading...");
+    const res = await registerUser(data);
+    toast.dismiss(loading);
+
+    if (res) {
+      toast.error(res.error);
+    } else {
+      router.refresh();
+      toast.success("welcome back");
+    }
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) =>
-          startTransition(() => onSubmit(data)),
+          startTransition(async () => await onSubmit(data)),
         )}
         className="space-y-4"
       >

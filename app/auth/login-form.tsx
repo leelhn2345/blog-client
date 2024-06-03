@@ -1,6 +1,5 @@
 "use client";
 
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -19,13 +18,8 @@ import { toast } from "sonner";
 import { useTransition } from "react";
 import { loginUser } from "./actions";
 import { useRouter } from "next/navigation";
-
-const loginFormSchema = z.object({
-  username: z.string().email("Invalid email format"),
-  password: z.string(),
-});
-
-type LoginCreds = z.infer<typeof loginFormSchema>;
+import { Checkbox } from "@/components/ui/checkbox";
+import { LoginCreds, loginFormSchema } from "./schema";
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -35,26 +29,32 @@ export function LoginForm() {
     defaultValues: {
       username: "",
       password: "",
+      staysLoggedIn: false,
     },
   });
 
-  function onSubmit(values: z.infer<typeof loginFormSchema>) {
-    toast.promise(() => loginUser(values), {
-      loading: "loading...",
-      success: () => {
-        router.refresh();
-        return "welcome back";
-      },
-      error: "invalid credentials",
-      duration: 1000,
-    });
+  async function onSubmit(values: LoginCreds) {
+    const data = {
+      ...values,
+      username: values.username.toLowerCase(),
+    };
+    const loading = toast("loading...");
+    const res = await loginUser(data);
+    toast.dismiss(loading);
+
+    if (res) {
+      toast.error(res.error);
+    } else {
+      router.refresh();
+      toast.success("welcome back");
+    }
   }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) =>
-          startTransition(() => onSubmit(data)),
+          startTransition(async () => await onSubmit(data)),
         )}
         className="space-y-4"
       >
@@ -89,6 +89,24 @@ export function LoginForm() {
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name="staysLoggedIn"
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-x-2">
+              <FormControl>
+                <Checkbox
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <FormDescription className="pb-2 leading-none">
+                Remember Me
+              </FormDescription>
+            </FormItem>
+          )}
+        />
+
         <Button type="submit" disabled={isPending}>
           {isPending ? "Loading..." : "Submit"}
         </Button>
