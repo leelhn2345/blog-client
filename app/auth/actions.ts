@@ -35,3 +35,12 @@ export async function registerUser(newUserCreds: NewUserCreds) {
     return { error: error.message };
   }
 }
+
+/**
+ * matters not if the request returns an error
+ *
+ * hacker shouldn't know if the email is registered or not.
+ */
+export async function resetPassword(email: string) {
+  return new Promise((resolve) => setTimeout(resolve, 3000));
+}

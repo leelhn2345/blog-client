@@ -20,6 +20,7 @@ import { loginUser } from "./actions";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoginCreds, loginFormSchema } from "./schema";
+import { ResetPassword } from "./reset-password";
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -81,9 +82,7 @@ export function LoginForm() {
                 <Input required type="password" autoComplete="off" {...field} />
               </FormControl>
               <FormDescription>
-                <span className="hover:cursor-pointer hover:underline">
-                  Forgot Password
-                </span>
+                <ResetPassword />
               </FormDescription>
               <FormMessage />
             </FormItem>
