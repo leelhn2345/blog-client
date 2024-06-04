@@ -43,7 +43,7 @@ export function LoginForm() {
     toast.dismiss(loading);
 
     if (res) {
-      toast.error(res.error);
+      toast.error(res.error, { duration: 2000 });
     } else {
       router.refresh();
       toast.success("welcome back");

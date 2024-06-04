@@ -35,7 +35,7 @@ export function RegisterForm() {
   });
 
   async function onSubmit(values: NewUserCreds) {
-    const data = {
+    const data: NewUserCreds = {
       ...values,
       username: values.username.toLowerCase(),
     };
@@ -44,10 +44,13 @@ export function RegisterForm() {
     toast.dismiss(loading);
 
     if (res) {
-      toast.error(res.error);
+      toast.error(res.error, { duration: 2000 });
     } else {
-      router.refresh();
-      toast.success("welcome back");
+      router.push("/");
+      toast.success(
+        "account created. please proceed with email verification.",
+        { duration: 4000 },
+      );
     }
   }
 

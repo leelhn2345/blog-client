@@ -34,6 +34,4 @@ export async function registerUser(newUserCreds: NewUserCreds) {
     const error = await res.json();
     return { error: error.message };
   }
-
-  await sessionLogin(res);
 }
