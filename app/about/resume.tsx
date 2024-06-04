@@ -10,7 +10,7 @@ import { Projects, TProject } from "./projects";
 import { Skills, SkillsSection } from "./skills";
 
 export type ResumeProps = {
-  aboutMe: string;
+  aboutMe: string[];
   jobExperiences: TJobExperience[];
   projects: TProject[];
   skills: SkillsSection;
@@ -29,7 +29,11 @@ export function Resume({
           About Me
         </AccordionTrigger>
         <AccordionContent className="pr-2 text-justify">
-          {aboutMe}
+          <div className="space-y-4">
+            {aboutMe.map((me, i) => (
+              <p key={i}>{me}</p>
+            ))}
+          </div>
         </AccordionContent>
       </AccordionItem>
       <AccordionItem value="item-2">

@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
+export const dynamic = "force-static";
+
 export default function NotFound() {
   return (
     <div className="container flex items-center justify-center">
