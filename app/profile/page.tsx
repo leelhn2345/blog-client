@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 
 async function fetchUserInfo() {
   const res = await fetch(`${process.env.BACKEND_URL}/user/user-info`, {
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
       Cookie: cookies().toString(),

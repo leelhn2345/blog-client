@@ -22,7 +22,15 @@ export function NavBar() {
           <NavigationMenuItem key={data.name}>
             <Link href={data.url} legacyBehavior passHref>
               <NavigationMenuLink
-                className={navigationMenuTriggerStyle()}
+                className={navigationMenuTriggerStyle({
+                  className: [
+                    [
+                      `bg-transparent !text-base font-semibold hover:bg-transparent hover:text-teal-600
+                      focus:bg-transparent focus:text-teal-600 data-[active]:bg-transparent
+                      data-[active]:text-teal-600`,
+                    ],
+                  ],
+                })}
                 active={pathname === data.url}
               >
                 {data.name}

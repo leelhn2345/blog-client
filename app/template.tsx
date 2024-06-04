@@ -13,7 +13,7 @@ export default function Template({ children }: TemplateProps) {
       className="flex flex-1"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ ease: "easeInOut", duration: 1 }}
+      transition={{ ease: "easeInOut", duration: 0.75 }}
     >
       {children}
     </motion.div>
