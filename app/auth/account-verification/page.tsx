@@ -2,31 +2,38 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 async function verifyAccount(token: string) {
+  const queryParams = new URLSearchParams({
+    token,
+  });
   const res = await fetch(
-    `${process.env.BACKEND_URL}/user/sign-up-verification/${token}`,
+    `${process.env.BACKEND_URL}/user/sign-up-verification?${queryParams}`,
     {
       method: "PUT",
+      cache: "no-store",
     },
   );
   return res;
 }
+
 type PageProps = {
-  params: { token: string };
+  searchParams: { token: string };
 };
 
-export default async function AccountVerificationPage({ params }: PageProps) {
-  const res = await verifyAccount(params.token);
+export default async function AccountVerificationPage({
+  searchParams,
+}: PageProps) {
+  const res = await verifyAccount(searchParams.token);
   if (!res.ok) {
     return (
       <div className="container mt-10">
-        <p>sorry there are issues verifiying you.</p>
+        <p>Sorry, there are errors pending your account verification.</p>
         <p>Please contact support for help.</p>
       </div>
     );
   }
   return (
     <div className="container mt-10">
-      <p>you are now verified!</p>
+      <p>Congrats! You are now verified!</p>
       <br />
       you may now{" "}
       <Link href="/auth">

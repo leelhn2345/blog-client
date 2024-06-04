@@ -23,7 +23,7 @@ export function Header() {
       className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/90
         backdrop-blur supports-[backdrop-filter]:bg-background/60"
     >
-      <div className="container flex h-14 justify-between">
+      <div className="container flex h-14 justify-between max-sm:px-4">
         <div className="my-auto md:hidden">
           <Sidebar />
         </div>

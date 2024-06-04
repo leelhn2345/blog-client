@@ -19,7 +19,7 @@ export default function ErrorPage({ reset }: ErrorProps) {
       </h1>
       <p>Sorry, we couldn{"'"}t find the resources you requested.</p>
       <div className="space-x-9">
-        <Button variant="outline" onClick={reset}>
+        <Button variant="outline" onClick={() => reset()}>
           Try Again
         </Button>
         <Button>

@@ -20,6 +20,8 @@ import { loginUser } from "./actions";
 import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoginCreds, loginFormSchema } from "./schema";
+import { PasswordResetDialog } from "./password-reset-dialog";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -81,9 +83,7 @@ export function LoginForm() {
                 <Input required type="password" autoComplete="off" {...field} />
               </FormControl>
               <FormDescription>
-                <span className="hover:cursor-pointer hover:underline">
-                  Forgot Password
-                </span>
+                <PasswordResetDialog />
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -108,7 +108,7 @@ export function LoginForm() {
         />
 
         <Button type="submit" disabled={isPending}>
-          {isPending ? "Loading..." : "Submit"}
+          {isPending ? <LoadingSpinner /> : "Submit"}
         </Button>
       </form>
     </Form>
