@@ -66,7 +66,7 @@ export async function sessionLogin(res: Response, staysLoggedIn?: boolean) {
  */
 export async function sessionLogout() {
   await fetch(`${process.env.BACKEND_URL}/user/logout`, {
-    method: "POST",
+    method: "PUT",
   });
   const appCookies = Object.values(AppCookies);
   appCookies.map((cookieName) => cookies().delete(cookieName));
