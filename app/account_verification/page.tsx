@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 async function verifyAccount(token: string) {
+  const queryParams = new URLSearchParams({
+    token,
+  });
   const res = await fetch(
-    `${process.env.BACKEND_URL}/user/sign-up-verification/${token}`,
+    `${process.env.BACKEND_URL}/user/sign-up-verification?${queryParams}`,
     {
       method: "PUT",
     },

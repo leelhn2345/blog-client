@@ -39,8 +39,12 @@ export async function registerUser(newUserCreds: NewUserCreds) {
 /**
  * matters not if the request returns an error
  *
- * hacker shouldn't know if the email is registered or not.
+ * hacker shouldn't know if the email is registered or not
+ * or the current password reset status
  */
 export async function resetPassword(email: string) {
-  return new Promise((resolve) => setTimeout(resolve, 3000));
+  const queryParams = new URLSearchParams({
+    email,
+  });
+  await fetch(`${process.env.BACKEND_URL}/user/password/reset?${queryParams}`);
 }
