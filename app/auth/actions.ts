@@ -46,5 +46,7 @@ export async function resetPassword(email: string) {
   const queryParams = new URLSearchParams({
     email,
   });
-  await fetch(`${process.env.BACKEND_URL}/user/password/reset?${queryParams}`);
+  await fetch(`${process.env.BACKEND_URL}/user/password/reset?${queryParams}`, {
+    method: "POST",
+  });
 }

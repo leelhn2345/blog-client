@@ -9,6 +9,7 @@ async function verifyAccount(token: string) {
     `${process.env.BACKEND_URL}/user/sign-up-verification?${queryParams}`,
     {
       method: "PUT",
+      cache: "no-store",
     },
   );
   return res;

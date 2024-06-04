@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { resetPassword } from "./actions";
 import { LoadingSpinner } from "@/components/loading-spinner";
 
-export function ResetPassword() {
+export function PasswordResetDialog() {
   const emailParser = z.string().email();
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");

@@ -19,6 +19,7 @@ import { useTransition } from "react";
 import { registerUser } from "./actions";
 import { useRouter } from "next/navigation";
 import { NewUserCreds, newUserFormSchema } from "./schema";
+import { LoadingSpinner } from "@/components/loading-spinner";
 
 export function RegisterForm() {
   const [isPending, startTransition] = useTransition();
@@ -130,7 +131,7 @@ export function RegisterForm() {
           )}
         />
         <Button type="submit" disabled={isPending}>
-          {isPending ? "Loading..." : "Submit"}
+          {isPending ? <LoadingSpinner /> : "Submit"}
         </Button>
       </form>
     </Form>
