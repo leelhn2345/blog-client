@@ -1,7 +1,10 @@
 import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { HtmlHTMLAttributes } from "react";
 
-export function LoadingSpinner({ className }: { className?: string }) {
+interface Props extends HtmlHTMLAttributes<HTMLElement> {}
+
+export function LoadingSpinner({ className }: Props) {
   return (
     <Loader2
       className={cn(
