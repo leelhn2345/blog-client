@@ -20,7 +20,7 @@ export function NavBar() {
       <NavigationMenuList>
         {navigationData.map((data) => (
           <NavigationMenuItem key={data.name}>
-            <Link href={data.url} legacyBehavior passHref>
+            <Link href={data.href} legacyBehavior passHref>
               <NavigationMenuLink
                 className={navigationMenuTriggerStyle({
                   className: [
@@ -31,7 +31,7 @@ export function NavBar() {
                     ],
                   ],
                 })}
-                active={pathname === data.url}
+                active={pathname === data.href}
               >
                 {data.name}
               </NavigationMenuLink>
