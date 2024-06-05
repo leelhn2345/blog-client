@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "../ui/button";
-import { LogOut, UserCog, UserRoundCheck } from "lucide-react";
+import { HandHelping, LogOut, UserCog, UserRoundCheck } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +32,11 @@ export function UserButton({ logout }: Props) {
           <UserCog className="mr-2 h-4 w-4" />
           <span>Manage Profile</span>
         </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => toast.info("not implemented yet")}>
+          <HandHelping className="mr-2 h-4 w-4" />
+          <span>Support</span>
+        </DropdownMenuItem>
+
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={async () => {

@@ -19,9 +19,9 @@ export function ProgressPage({ pageName }: ProgressPageProp) {
           Sorry, <span className="text-xl font-bold">{pageName}</span> is
           currently not available.
         </p>
-        <Button>
-          <Link href="/">Return Home</Link>
-        </Button>
+        <Link href="/">
+          <Button>Return Home</Button>
+        </Link>
       </div>
     </div>
   );

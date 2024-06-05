@@ -31,9 +31,9 @@ export default async function UnauthorizedPage() {
           <h1 className="text-3xl font-bold">Unauthorized User</h1>
           <p>
             You need to{" "}
-            <Button>
-              <Link href="/auth">Login</Link>
-            </Button>{" "}
+            <Link href="/auth">
+              <Button>Login</Button>
+            </Link>
             to view this page.
           </p>
         </>

@@ -37,7 +37,7 @@ export function JobExperience({ data }: JobExperienceProp) {
               <div key={y.jobTitle} className="mb-4">
                 <div className="flex items-center justify-between text-base">
                   <h4 className="my-3 italic">{y.jobTitle}</h4>
-                  <time className="mb-1 mr-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
+                  <time className="mb-1 mr-2 text-sm font-normal leading-none text-muted-foreground">
                     {y.timeSpan}
                   </time>
                 </div>

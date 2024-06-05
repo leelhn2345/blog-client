@@ -1,9 +1,10 @@
-import { ProgressPage } from "@/components/progress-page";
 import { UnknownError } from "@/lib/exceptions";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { Separator } from "@/components/ui/separator";
+import { ProfileInfo, UserInfo } from "./profile-info";
 
-async function fetchUserInfo() {
+async function fetchUserInfo(): Promise<UserInfo> {
   const res = await fetch(`${process.env.BACKEND_URL}/user/user-info`, {
     cache: "no-store",
     headers: {
@@ -20,14 +21,17 @@ async function fetchUserInfo() {
 }
 
 export default async function ProfilePage() {
-  const userInfo = await fetchUserInfo();
+  const user = await fetchUserInfo();
   return (
-    <div className="container flex flex-col items-center justify-center">
-      <h1>
-        hello {userInfo.firstName} {userInfo.lastName}
-      </h1>
-      <p className="mb-4">sorry this page isn{"'"} ready yet</p>
-      <ProgressPage pageName="this page" />
+    <div className="w-full space-y-6">
+      <div>
+        <h3 className="text-xl font-medium">Profile</h3>
+        <p className="text-sm text-muted-foreground">
+          Profile information page.
+        </p>
+      </div>
+      <Separator />
+      <ProfileInfo user={user} />
     </div>
   );
 }
