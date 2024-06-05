@@ -22,7 +22,7 @@ export function Sidebar({ className, items }: Props) {
               pathname === item.href
                 ? "bg-muted hover:bg-muted"
                 : "hover:bg-transparent hover:underline",
-              "w-full justify-start",
+              "w-full justify-start text-base",
             )}
           >
             {item.title}

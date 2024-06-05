@@ -2,10 +2,13 @@
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
-export default function ErrorPage() {
-  const router = useRouter();
+type ErrorProps = {
+  error: Error;
+  reset: () => void;
+};
+
+export default function ErrorPage({ reset }: ErrorProps) {
   return (
     <div className="container flex flex-col items-center justify-center gap-y-6">
       <h1
@@ -16,7 +19,7 @@ export default function ErrorPage() {
       </h1>
       <p>Sorry, we couldn{"'"}t find the resources you requested.</p>
       <div className="space-x-9">
-        <Button variant="outline" onClick={() => router.refresh()}>
+        <Button variant="outline" onClick={() => reset()}>
           Try Again
         </Button>
         <Button>

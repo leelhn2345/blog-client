@@ -2,28 +2,8 @@ import {
   PermissionBadge,
   PermissionLevels,
 } from "@/components/permission-badge";
-import { z } from "zod";
-import { ChangePasswordForm } from "./change-password-form";
-
-const changePasswordSchema = z
-  .object({
-    oldPassword: z.string(),
-    newPassword: z
-      .string()
-      .min(8, "Password must be at least 8 characters long")
-      .max(20, "Password must be at most 20 characters long")
-      .regex(
-        /[!@#$%^&*~(),.?":{}|<>]/,
-        "Password must contain at least one special character",
-      ),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
-
-export type ChangePasswordData = z.infer<typeof changePasswordSchema>;
+import { ChangePasswordData, ChangePasswordForm } from "./change-password-form";
+import { cookies } from "next/headers";
 
 export type UserInfo = {
   username: string;
@@ -40,6 +20,22 @@ type Props = {
 
 export function ProfileInfo({ user }: Props) {
   const joinedString = new Date(user.joinedAt).toLocaleString();
+
+  async function postNewPassword(values: ChangePasswordData) {
+    "use server";
+    const res = await fetch(`${process.env.BACKEND_URL}/user/password/change`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: cookies().toString(),
+      },
+      body: JSON.stringify(values),
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      return { error: err.message };
+    }
+  }
   return (
     <div className="space-y-8">
       <div className="space-y-2">
@@ -47,7 +43,7 @@ export function ProfileInfo({ user }: Props) {
         <p className="rounded-md border p-2">{user.username}</p>
         <PermissionBadge permission={user.permissionLevel} />
       </div>
-      <ChangePasswordForm />
+      <ChangePasswordForm postNewPassword={postNewPassword} />
       <div className="flex justify-between gap-x-4">
         <div className="w-full space-y-2">
           <h4 className="ml-1 font-semibold">First Name</h4>
