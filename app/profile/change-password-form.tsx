@@ -82,7 +82,9 @@ export function ChangePasswordForm({ postNewPassword }: Props) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary">Change Password</Button>
+        <Button className="ring-teal-900 hover:ring-2" variant="secondary">
+          Change Password
+        </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[425px]">
         <Form {...form}>
