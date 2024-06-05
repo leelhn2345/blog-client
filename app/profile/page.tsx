@@ -1,9 +1,21 @@
-import { ProgressPage } from "@/components/progress-page";
 import { UnknownError } from "@/lib/exceptions";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
-async function fetchUserInfo() {
+enum PermissionLevels {
+  MEMBER = "member",
+  ADMIN = "admin",
+  ALPHA = "alpha",
+}
+type UserInfo = {
+  username: string;
+  firstName: string;
+  lastName: string;
+  joinedAt: string;
+  lastUpdated: string;
+  permissionLevel: PermissionLevels;
+};
+async function fetchUserInfo(): Promise<UserInfo> {
   const res = await fetch(`${process.env.BACKEND_URL}/user/user-info`, {
     cache: "no-store",
     headers: {
@@ -21,13 +33,6 @@ async function fetchUserInfo() {
 
 export default async function ProfilePage() {
   const userInfo = await fetchUserInfo();
-  return (
-    <div className="container flex flex-col items-center justify-center">
-      <h1>
-        hello {userInfo.firstName} {userInfo.lastName}
-      </h1>
-      <p className="mb-4">sorry this page isn{"'"} ready yet</p>
-      <ProgressPage pageName="this page" />
-    </div>
-  );
+  console.log(userInfo);
+  return <div>{userInfo.permissionLevel}</div>;
 }
