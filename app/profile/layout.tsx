@@ -7,7 +7,7 @@ import { NavBar } from "./navbar";
 import { Sidebar } from "./sidebar";
 
 const items = [
-  { title: "General", href: "/profile" },
+  { title: "Profile", href: "/profile" },
   { title: "Telegram", href: "/profile/telegram" },
 ];
 
@@ -20,7 +20,7 @@ export default function Layout({
     <div className="container my-4 flex w-screen flex-col">
       <div className="mb-4 space-y-2">
         <h1 className="text-4xl font-bold">Settings</h1>
-        <p className="text-gray-400">Manage your accounts settings</p>
+        <p className="text-muted-foreground">Manage your accounts settings</p>
       </div>
       <Separator className="mb-4" />
       <div className="flex flex-col gap-4 md:flex-row">
