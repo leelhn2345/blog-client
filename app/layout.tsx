@@ -6,12 +6,11 @@ import { Footer } from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/providers/theme";
 import { Toaster } from "@/components/ui/sonner";
-import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Digital Garden",
+  title: "Alaladin's Digital Garden",
   description: "☆*: .｡. o(≧▽≦)o .｡.:*☆",
 };
 
@@ -39,7 +38,6 @@ export default function RootLayout({
           <main className="flex flex-1 border-b">{children}</main>
           <Toaster position="top-right" duration={1000} richColors />
           <Footer />
-          <BackgroundBeams className="-z-50" />
         </ThemeProvider>
       </body>
     </html>

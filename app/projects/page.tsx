@@ -1,13 +1,19 @@
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 
-export default function CardHoverEffectDemo() {
+export default function ProjectPage() {
   return (
-    <div className="container">
+    <div className="container pt-10">
+      <h1
+        className="bg-gradient-to-br from-amber-500 to-green-600 bg-clip-text pb-3 text-5xl
+          font-bold text-transparent"
+      >
+        ~ In Progress ~
+      </h1>
       <HoverEffect items={projects} />
     </div>
   );
 }
-export const projects = [
+const projects = [
   {
     title: "Stripe",
     description:
