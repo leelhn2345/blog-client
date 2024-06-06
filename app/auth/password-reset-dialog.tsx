@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { ChangeEvent, useState, useTransition } from "react";
 import { toast } from "sonner";
 import { resetPassword } from "./actions";
-import { LoadingSpinner } from "@/components/loading-spinner";
+import { Spinner } from "@/components/loading-spinner";
 
 export function PasswordResetDialog() {
   const emailParser = z.string().email();
@@ -78,7 +78,7 @@ export function PasswordResetDialog() {
             type="submit"
             onClick={() => startTransition(async () => await handleSubmit())}
           >
-            {isPending ? <LoadingSpinner /> : "Submit"}
+            {isPending ? <Spinner /> : "Submit"}
           </Button>
         </DialogFooter>
       </DialogContent>

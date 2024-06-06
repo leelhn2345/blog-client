@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { LoadingSpinner } from "@/components/loading-spinner";
+import { Spinner } from "@/components/loading-spinner";
 import { useTransition } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -83,7 +83,7 @@ export function PasswordResetForm({ resetToken, submitNewPassword }: Props) {
           )}
         />
         <Button type="submit" disabled={isPending}>
-          {isPending ? <LoadingSpinner /> : "Submit"}
+          {isPending ? <Spinner /> : "Submit"}
         </Button>
       </form>
     </Form>

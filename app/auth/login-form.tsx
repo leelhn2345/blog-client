@@ -21,7 +21,7 @@ import { useRouter } from "next/navigation";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LoginCreds, loginFormSchema } from "./schema";
 import { PasswordResetDialog } from "./password-reset-dialog";
-import { LoadingSpinner } from "@/components/loading-spinner";
+import { Spinner } from "@/components/loading-spinner";
 
 export function LoginForm() {
   const [isPending, startTransition] = useTransition();
@@ -108,7 +108,7 @@ export function LoginForm() {
         />
 
         <Button type="submit" disabled={isPending}>
-          {isPending ? <LoadingSpinner /> : "Submit"}
+          {isPending ? <Spinner /> : "Submit"}
         </Button>
       </form>
     </Form>

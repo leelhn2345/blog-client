@@ -1,6 +1,6 @@
 "use client";
 
-import { LoadingSpinner } from "@/components/loading-spinner";
+import { Spinner } from "@/components/loading-spinner";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import {
@@ -134,7 +134,7 @@ export function ChangePasswordForm({ postNewPassword }: Props) {
               )}
             />
             <Button type="submit" disabled={isPending}>
-              {isPending ? <LoadingSpinner /> : "Confirm"}
+              {isPending ? <Spinner /> : "Confirm"}
             </Button>
           </form>
         </Form>
