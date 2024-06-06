@@ -47,10 +47,10 @@ export function RegisterForm() {
     if (res) {
       toast.error(res.error, { duration: 2000 });
     } else {
-      router.push("/");
+      router.refresh();
       toast.success(
         "account created. please proceed with email verification.",
-        { duration: 4000 },
+        { duration: 6000 },
       );
     }
   }
