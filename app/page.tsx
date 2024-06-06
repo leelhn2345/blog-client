@@ -43,7 +43,7 @@ export default function Home() {
       </div>
       <InfiniteMovingCards items={testimonials} direction="left" speed="slow" />
       <div className="mt-2 space-y-4">
-        <p className="font-semibold">This is a hobby experimental site.</p>
+        <p className="font-semibold md:text-xl">This is a hobby site.</p>
       </div>
     </div>
   );
