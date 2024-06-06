@@ -20,7 +20,7 @@ export function ProgressPage({ pageName }: ProgressPageProp) {
           currently not available.
         </p>
         <Link href="/">
-          <Button>Return Home</Button>
+          <Button className="mt-4">Return Home</Button>
         </Link>
       </div>
     </div>

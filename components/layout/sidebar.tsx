@@ -37,8 +37,12 @@ export function Sidebar() {
           {navigationData.map((data) => (
             <SheetClose asChild key={data.name}>
               <Link
-                className={`font-semibold ${pathname === data.url ? "text-teal-600" : "hover:text-teal-600"}`}
-                href={data.url}
+                className={`font-semibold ${
+                  pathname === data.href
+                    ? "text-teal-600"
+                    : "hover:text-teal-600"
+                }`}
+                href={data.href}
               >
                 {data.name}
               </Link>

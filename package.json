@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint . --max-warnings 0",
-    "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json,yaml,yml,css}'"
+    "prettier:check": "prettier --check '**/*.{js,jsx,ts,tsx,json,yaml,yml,css}'",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,yaml,yml,css}'"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.0",
@@ -22,6 +23,9 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tabs": "^1.0.4",
+    "@tsparticles/engine": "^3.4.0",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "framer-motion": "^11.2.4",
