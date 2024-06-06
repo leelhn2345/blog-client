@@ -43,15 +43,15 @@ export const HoverEffect = ({ items, className }: Props) => {
                 }}
                 exit={{
                   opacity: 0,
-                  transition: { duration: 0.15, delay: 0.2 },
+                  transition: { duration: 0.15, delay: 0.1 },
                 }}
               />
             )}
           </AnimatePresence>
           <Card
-            className="relative z-20 h-full w-full overflow-hidden rounded-2xl border
-              border-transparent p-4 group-hover:border-slate-700 dark:border-white/[0.2]
-              dark:bg-black"
+            className="relative z-20 h-full w-full overflow-hidden rounded-2xl border border-slate-700
+              bg-white/70 p-4 group-hover:border-slate-700 dark:border-white/[0.2]
+              dark:bg-black/70"
           >
             <CardTitle className="mt-4 font-bold tracking-wide dark:text-zinc-100">
               {item.title}
