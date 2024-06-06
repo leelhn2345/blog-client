@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { ThemeProvider } from "@/providers/theme";
 import { Toaster } from "@/components/ui/sonner";
 import { SparklesBackground } from "@/components/layout/sparkles-background";
@@ -41,6 +43,8 @@ export default function RootLayout({
           <Toaster position="top-right" duration={1000} richColors />
           <Footer />
         </ThemeProvider>
+        <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
