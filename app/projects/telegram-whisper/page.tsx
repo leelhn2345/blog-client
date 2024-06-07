@@ -1,5 +1,6 @@
 import Image from "next/image";
-import turtleImg from "../../../public/turtle hello.webp";
+import turtleImg from "../../../public/turtle.webp";
+import { VerifyTelegramToken } from "./verify-telegram-token";
 
 async function fetchInfo() {
   const res = await fetch(`${process.env.BACKEND_URL}/health_check`, {
@@ -10,8 +11,8 @@ async function fetchInfo() {
 export default async function Page() {
   await fetchInfo();
   return (
-    <div className="container my-8 flex justify-center">
-      <div className="inline-flex items-baseline space-x-4">
+    <div className="container my-8 flex flex-col justify-center gap-y-4">
+      <div className="flex items-baseline justify-center space-x-4">
         <Image
           priority={true}
           src={turtleImg}
@@ -24,6 +25,9 @@ export default async function Page() {
         >
           The whisperer
         </h1>
+      </div>
+      <div className="flex justify-center gap-x-4">
+        <VerifyTelegramToken />
       </div>
     </div>
   );
