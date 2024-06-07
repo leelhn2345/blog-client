@@ -3,18 +3,36 @@ import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { HTMLAttributes, useState } from "react";
-import { Card, CardDescription, CardTitle } from "./card";
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
+enum Publicity {
+  PUBLIC = "public",
+  MEMBER = "member",
+}
 interface Props extends HTMLAttributes<HTMLElement> {
   items: {
-    title: string;
-    description: string;
-    link: string;
+    name: string;
+    summary: string;
+    url: string;
+    publicity: Publicity;
   }[];
 }
 export const HoverEffect = ({ items, className }: Props) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
+  function isExternalLink(urlString: string): boolean {
+    try {
+      const url = new URL(urlString);
+      return (
+        !!url.protocol &&
+        (url.protocol === "http:" || url.protocol === "https:")
+      );
+    } catch (e) {
+      // If the URL constructor throws an error, it's likely a relative URL
+      return false;
+    }
+  }
   return (
     <div
       className={cn(
@@ -24,9 +42,11 @@ export const HoverEffect = ({ items, className }: Props) => {
     >
       {items.map((item, idx) => (
         <Link
-          href={item?.link}
-          key={item?.link}
+          href={item?.url}
+          key={idx}
           className="group relative block h-full w-full p-2"
+          target={isExternalLink(item.url) ? "_blank" : undefined}
+          referrerPolicy={isExternalLink(item.url) ? "no-referrer" : undefined}
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
@@ -50,14 +70,16 @@ export const HoverEffect = ({ items, className }: Props) => {
           </AnimatePresence>
           <Card
             className="relative z-20 h-full w-full overflow-hidden rounded-2xl border border-slate-700
-              bg-white/70 p-4 group-hover:border-slate-700 dark:border-white/[0.2]
-              dark:bg-black/70"
+              bg-white p-4 group-hover:border-slate-700 dark:border-white/[0.2] dark:bg-black"
           >
             <CardTitle className="mt-4 font-bold tracking-wide dark:text-zinc-100">
-              {item.title}
+              <div className="flex items-center gap-x-2">
+                <p>{item.name}</p>
+                {item.publicity === Publicity.MEMBER && <Badge>Member</Badge>}
+              </div>
             </CardTitle>
             <CardDescription className="mt-8 text-sm leading-relaxed tracking-wide text-zinc-500 dark:text-zinc-400">
-              {item.description}
+              {item.summary}
             </CardDescription>
           </Card>
         </Link>
