@@ -108,7 +108,7 @@ export function LoginForm() {
         />
 
         <Button type="submit" disabled={isPending}>
-          {isPending ? <Spinner /> : "Submit"}
+          {isPending ? <Spinner className="dark:text-black" /> : "Submit"}
         </Button>
       </form>
     </Form>
