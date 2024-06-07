@@ -1,7 +1,5 @@
 import { HoverEffect } from "@/components/ui/card-hover-effect";
 
-export const dynamic = "force-static";
-
 export default function ProjectPage() {
   return (
     <div className="container pt-10">
