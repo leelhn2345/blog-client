@@ -1,3 +1,30 @@
+import Image from "next/image";
+import turtleImg from "../../../public/turtle hello.webp";
+
+async function fetchInfo() {
+  const res = await fetch(`${process.env.BACKEND_URL}/health_check`, {
+    cache: "no-store",
+  });
+  return res;
+}
 export default async function Page() {
-  return <div className="container"> hello</div>;
+  await fetchInfo();
+  return (
+    <div className="container my-8 flex justify-center">
+      <div className="inline-flex items-baseline space-x-4">
+        <Image
+          priority={true}
+          src={turtleImg}
+          alt="turtle waving hello"
+          className="h-14 w-14"
+        />
+        <h1
+          className="bg-gradient-to-br from-amber-500 to-green-600 bg-clip-text text-4xl font-bold
+            text-transparent md:text-5xl"
+        >
+          The whisperer
+        </h1>
+      </div>
+    </div>
+  );
 }
