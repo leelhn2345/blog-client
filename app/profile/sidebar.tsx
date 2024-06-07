@@ -21,7 +21,7 @@ export function Sidebar({ className, items }: Props) {
             className={cn(
               pathname === item.href
                 ? "bg-muted hover:bg-muted"
-                : "hover:bg-transparent hover:underline",
+                : "hover:bg-transparent hover:text-teal-600",
               "w-full justify-start text-base",
             )}
           >
