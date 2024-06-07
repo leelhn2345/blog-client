@@ -29,6 +29,9 @@ const testimonials = [
     title: "Lost Elf",
   },
 ];
+
+export const dynamic = "force-static";
+
 export default function Home() {
   return (
     <div className="container my-8 flex flex-col items-center justify-center gap-y-4 text-center">

@@ -5,6 +5,8 @@ import Image from "next/image";
 import profileImage from "../../public/profile.jpg";
 import { UnknownError } from "@/lib/exceptions";
 
+export const dynamic = "force-static";
+
 async function getResume(): Promise<ResumeProps> {
   try {
     const res = await fetch(`${process.env.BACKEND_URL}/resume`, {
