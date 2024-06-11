@@ -24,6 +24,16 @@ export function Resume({
 }: ResumeProps) {
   return (
     <Accordion type="multiple">
+      <AccordionItem value="item-0">
+        <AccordionTrigger className="text-lg font-bold">
+          What is Alaladin?
+        </AccordionTrigger>
+        <AccordionContent>
+          <span className="font-bold italic">Alaladin</span> is my in-game
+          character name for several games. I picked this name to be the domain
+          URL because it sounds funny and it{"'"}s available for purchase.
+        </AccordionContent>
+      </AccordionItem>
       <AccordionItem value="item-1">
         <AccordionTrigger className="text-lg font-bold">
           About Me

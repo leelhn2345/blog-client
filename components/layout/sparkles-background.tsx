@@ -1,6 +1,8 @@
 import { SparklesCore } from "../ui/sparkles";
+import { getAppearanceInfo } from "./actions";
 
-export function SparklesBackground() {
+export async function SparklesBackground() {
+  await getAppearanceInfo();
   return (
     <div className="absolute inset-0 -z-50 h-screen w-full">
       <SparklesCore

@@ -29,8 +29,11 @@ export function NavBar({ items }: Props) {
                   className: [
                     [
                       [
-                        `!text-sm, hover:bg-transparent hover:underline focus:bg-transparent
-                        focus:underline data-[active]:bg-muted`,
+                        [
+                          `!text-sm, hover:bg-transparent hover:text-teal-600 focus:bg-transparent
+                          focus:text-teal-600 data-[active]:bg-muted hover:data-[active]:bg-muted
+                          focus:data-[active]:bg-muted`,
+                        ],
                       ],
                     ],
                   ],
