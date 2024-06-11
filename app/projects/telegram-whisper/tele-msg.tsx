@@ -1,20 +1,20 @@
-import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
+import { TeleMsgForm } from "./tele-msg-form";
+import { availableChats } from "./actions";
 
-export function TeleMsg() {
+export async function TeleMsg() {
+  const res = await availableChats();
   return (
     <div className="flex w-full justify-center">
       <Card className="w-full max-w-lg">
         <CardHeader>
-          <CardTitle>Card Title</CardTitle>
+          <CardTitle>What is your secretive message?</CardTitle>
           <CardDescription>
             For chats that you want to whisper to,
             <br />
@@ -26,11 +26,8 @@ export function TeleMsg() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <Textarea placeholder="Type your message here." />
+          <TeleMsgForm data={res} />
         </CardContent>
-        <CardFooter>
-          <Button className="w-full">Submit</Button>
-        </CardFooter>
       </Card>
     </div>
   );
