@@ -11,6 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { TeleMsg } from "./tele-msg";
 
 async function fetchInfo(): Promise<boolean | null> {
   const res = await fetch(`${process.env.BACKEND_URL}/telegram/check-user`, {
@@ -77,7 +78,7 @@ export default async function Page() {
         </div>
       )}
       {res === false && <VerifyTelegramToken />}
-      {res === true && <div>form</div>}
+      {res === true && <TeleMsg />}
     </div>
   );
 }

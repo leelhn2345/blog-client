@@ -1,4 +1,5 @@
 "use server";
+import { UnknownError } from "@/lib/exceptions";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
@@ -21,4 +22,20 @@ export async function postTelegramVerificationToken(token: string) {
     }
   }
   revalidatePath("/projects/telegram-whisper");
+}
+
+export async function availableChats() {
+  const res = await fetch(
+    `${process.env.BACKEND_URL}/telegram/chats-available`,
+    {
+      cache: "no-store",
+      headers: {
+        Cookie: cookies().toString(),
+      },
+    },
+  );
+  if (!res.ok) {
+    throw new UnknownError();
+  }
+  return res.json();
 }
