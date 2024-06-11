@@ -9,12 +9,6 @@ export default async function ProjectPage() {
   const data = await getProjectList();
   return (
     <div className="container pt-10">
-      <h1
-        className="bg-gradient-to-br from-amber-500 to-green-600 bg-clip-text pb-3 text-5xl
-          font-bold text-transparent"
-      >
-        ~ In Progress ~
-      </h1>
       <div className="ml-4">
         <Badge>Member</Badge> means you need to sign up to use it
         {"'"}s functionalities.

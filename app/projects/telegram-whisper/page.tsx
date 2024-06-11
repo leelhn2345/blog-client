@@ -71,7 +71,8 @@ export default async function Page() {
                 </TooltipTrigger>
                 <TooltipContent>
                   <p>
-                    Directions to this feature code will be provided on request.
+                    For verification purposes, directions to this feature code
+                    will be provided on request.
                   </p>
                 </TooltipContent>
               </Tooltip>
