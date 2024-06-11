@@ -66,6 +66,7 @@ export function PasswordResetDialog() {
             </Label>
             <Input
               id="name"
+              type="email"
               placeholder="user@email.com"
               className="col-span-3"
               value={email}

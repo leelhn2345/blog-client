@@ -43,7 +43,7 @@ export const HoverEffect = ({ items, className }: Props) => {
       {items.map((item, idx) => (
         <Link
           href={item?.url}
-          key={idx}
+          key={item.name}
           className="group relative block h-full w-full p-2"
           target={isExternalLink(item.url) ? "_blank" : undefined}
           referrerPolicy={isExternalLink(item.url) ? "no-referrer" : undefined}

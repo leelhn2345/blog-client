@@ -1,15 +1,27 @@
 import Image from "next/image";
 import turtleImg from "../../../public/turtle.webp";
 import { VerifyTelegramToken } from "./verify-telegram-token";
+import { cookies } from "next/headers";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { InfoIcon } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
-async function fetchInfo() {
-  const res = await fetch(`${process.env.BACKEND_URL}/health_check`, {
-    cache: "no-store",
+async function fetchInfo(): Promise<boolean | null> {
+  const res = await fetch(`${process.env.BACKEND_URL}/telegram/check-user`, {
+    headers: {
+      Cookie: cookies().toString(),
+    },
   });
-  return res;
+  return res.json();
 }
 export default async function Page() {
-  await fetchInfo();
+  const res = await fetchInfo();
   return (
     <div className="container my-8 flex flex-col justify-center gap-y-4">
       <div className="flex items-baseline justify-center space-x-4">
@@ -26,9 +38,46 @@ export default async function Page() {
           The whisperer
         </h1>
       </div>
-      <div className="flex justify-center gap-x-4">
-        <VerifyTelegramToken />
-      </div>
+      {res === null && (
+        <div className="flex flex-col items-center justify-center gap-y-4 space-y-4 text-center">
+          <div>
+            This feature is for{" "}
+            <Link href="/auth">
+              <Badge>members</Badge> only.
+            </Link>
+            <br />
+            <br />
+            <p>
+              Please consider signing up with us to abuse the latent cloak of
+              anonymity 😈.
+            </p>
+          </div>
+          <details>
+            <summary>Here{"'"}s what you can do in telegram</summary>
+            <ul className="ml-8 list-disc text-start">
+              <li>Send messages anonymously.</li>
+              <li>Send media anonymously.</li>
+            </ul>
+          </details>
+          <p className="inline-flex gap-x-2">
+            No messages will be recorded.
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <InfoIcon />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>
+                    Directions to this feature code will be provided on request.
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </p>
+        </div>
+      )}
+      {res === false && <VerifyTelegramToken />}
+      {res === true && <div>form</div>}
     </div>
   );
 }

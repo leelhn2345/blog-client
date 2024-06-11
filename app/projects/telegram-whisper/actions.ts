@@ -1,4 +1,5 @@
 "use server";
+import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function postTelegramVerificationToken(token: string) {
@@ -12,8 +13,12 @@ export async function postTelegramVerificationToken(token: string) {
     },
   );
   if (!res.ok) {
-    const err = await res.json();
-
-    return { error: err?.message || "please contact support" };
+    try {
+      const err = await res.json();
+      return { error: err.message };
+    } catch (error) {
+      return { error: "invalid request" };
+    }
   }
+  revalidatePath("/projects/telegram-whisper");
 }

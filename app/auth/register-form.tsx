@@ -70,7 +70,7 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input required {...field} />
+                <Input type="email" required {...field} />
               </FormControl>
               <FormDescription>This is your username.</FormDescription>
               <FormMessage />

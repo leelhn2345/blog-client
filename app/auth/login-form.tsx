@@ -67,7 +67,7 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input required {...field} />
+                <Input type="email" required {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
