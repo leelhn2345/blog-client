@@ -12,6 +12,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { TeleMsg } from "./tele-msg";
+import { Suspense } from "react";
+import Loading from "@/app/loading";
 
 async function fetchInfo(): Promise<boolean | null> {
   const res = await fetch(`${process.env.BACKEND_URL}/telegram/check-user`, {
@@ -78,7 +80,11 @@ export default async function Page() {
         </div>
       )}
       {res === false && <VerifyTelegramToken />}
-      {res === true && <TeleMsg />}
+      {res === true && (
+        <Suspense fallback={<Loading />}>
+          <TeleMsg />
+        </Suspense>
+      )}
     </div>
   );
 }
