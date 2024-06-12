@@ -51,7 +51,7 @@ export default async function Page() {
             <br />
             <br />
             <p>
-              Please consider signing up with us to abuse the latent cloak of
+              Please consider signing up with us to abuse this latent cloak of
               anonymity 😈.
             </p>
           </div>

@@ -64,6 +64,9 @@ export async function postAnonMsg(chatId: string, text: string) {
 
   if (!res.ok) {
     try {
+      if (res.status == 403) {
+        revalidateTag("telechats");
+      }
       const err = await res.json();
       return { error: err.message };
     } catch (_) {
